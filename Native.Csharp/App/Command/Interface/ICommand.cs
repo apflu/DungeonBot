@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Native.Csharp.App.Event.EventHandler;
 
 namespace Native.Csharp.App.Command.Interface
 {
-    interface ICommand
+    public interface ICommand
     {
         void Execute(Player sender, String[] args);
-        void Register();
-
+        PlayerCommandHandler Register();
+        
     }
 }

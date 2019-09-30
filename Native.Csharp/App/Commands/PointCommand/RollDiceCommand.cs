@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Native.Csharp.App.Event.EventHandler;
 
 namespace Native.Csharp.App.Commands.PointCommand
 {
@@ -19,6 +20,7 @@ namespace Native.Csharp.App.Commands.PointCommand
             if (args == null)
             {
                 Values.messageSender.SendGroupMessage(sender, sender.GetCurrentGroup(), Dice.GetDice("1d20").ToString());
+                
             }
             else
             {
@@ -26,9 +28,9 @@ namespace Native.Csharp.App.Commands.PointCommand
             }
         }
 
-        public void Register()
+        public PlayerCommandHandler Register()
         {
-            Values.GetEventHandler().RegisterPlayerCommand(new Event.EventHandler.PlayerCommandHandler(Execute));
+            return new PlayerCommandHandler(Execute);
         }
     }
 }

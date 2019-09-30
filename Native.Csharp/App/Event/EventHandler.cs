@@ -33,6 +33,7 @@ namespace Native.Csharp.App.Event
         //public delegate void ItemConsumeHandler(Player sender, Item item);
 
         //plugin event
+        public delegate void PluginStartUpHandler();
         //public delegate void PluginGroupStatusChangeHandler(Player sender, long group);
         //public delegate void PluginGlobalStatusChangeHandler(Player sender);
 
@@ -42,15 +43,26 @@ namespace Native.Csharp.App.Event
         
         //events
         private event PlayerCommandHandler PlayerCommandEvent;
+        private event PluginStartUpHandler PluginStartUpEvent;
 
-        public void PlayerCommand(Player sender, String[] args)
+        public void PlayerCommand(Player sender, string[] args)
         {
             PlayerCommandEvent(sender, args);
         }
 
         public void RegisterPlayerCommand(PlayerCommandHandler @delegate)
         {
-            this.PlayerCommandEvent += @delegate;
+            PlayerCommandEvent += @delegate;
+        }
+
+        public void PluginStartUp()
+        {
+            PluginStartUpEvent();
+        }
+
+        public void RegisterPluginStartUp(PluginStartUpHandler @delegate)
+        {
+            PluginStartUpEvent += @delegate;
         }
     }
 }

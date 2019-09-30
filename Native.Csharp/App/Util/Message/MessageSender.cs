@@ -21,6 +21,12 @@ namespace Native.Csharp.App.Util.Message
             //LocaleType Locale = Player.GetCurrentLocale(target);
             //Common.CqApi.SendGroupMessage(new MessagePlain(message));
 
+
+        }
+
+        private void Send()
+        {
+
         }
     }
 }

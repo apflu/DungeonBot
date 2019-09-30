@@ -30,6 +30,7 @@ namespace Native.Csharp.App.Event
             //Init phase start
             Values.SetConnectManager(new ConnectManager());
             Values.SetEventHandler(new EventHandler());
+            Values.SetCommandHandler(new Command.CommandHandler());
 
 
             //Init phase end
