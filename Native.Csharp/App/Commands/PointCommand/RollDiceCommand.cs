@@ -28,7 +28,7 @@ namespace Native.Csharp.App.Commands.PointCommand
 
         public void Register()
         {
-            Values.GetEventHandler().PlayerCommandEvent += new Event.EventHandler.PlayerCommandHandler(Execute);
+            Values.GetEventHandler().RegisterPlayerCommand(new Event.EventHandler.PlayerCommandHandler(Execute));
         }
     }
 }

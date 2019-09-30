@@ -41,11 +41,16 @@ namespace Native.Csharp.App.Event
         //public delegate void NextDayHandler();
         
         //events
-        public event PlayerCommandHandler PlayerCommandEvent;
+        private event PlayerCommandHandler PlayerCommandEvent;
 
         public void PlayerCommand(Player sender, String[] args)
         {
             PlayerCommandEvent(sender, args);
+        }
+
+        public void RegisterPlayerCommand(PlayerCommandHandler @delegate)
+        {
+            this.PlayerCommandEvent += @delegate;
         }
     }
 }
