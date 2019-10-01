@@ -33,7 +33,7 @@ namespace Native.Csharp.App.Command
             Values.GetEventHandler().PlayerCommand(sender, SplitArgs(message.Message));
         }
 
-        private String[] SplitArgs(String args)
+        private string[] SplitArgs(string args)
         {
             return args.Split(' ');
         }

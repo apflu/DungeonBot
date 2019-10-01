@@ -12,7 +12,7 @@ namespace Native.Csharp.App.Event
     public class EventHandler
     {
         //player event
-        public delegate void PlayerCommandHandler(Player sender, String[] args);
+        public delegate void PlayerCommandHandler(Player sender, string[] args);
         //public delegate void PlayerDataChangeHander(Player target);
         //public delegate void PlayerCharacterChangeHandler(Player sender, Character character);
         //public delegate void PlayerUseSkillHandler(Player sender, Skill skill);

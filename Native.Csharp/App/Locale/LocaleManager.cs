@@ -10,14 +10,14 @@ namespace Native.Csharp.App.Locale
 {
     public class LocaleManager
     {
-        String[] Locales;
+        string[] Locales;
 
-        public String Parse(String Locale)
+        public string Parse(string Locale)
         {
             return "";
         }
 
-        public MessagePlain Format(String messagePreset, LocaleType locale)
+        public MessagePlain Format(string messagePreset, LocaleType locale)
         {
             
 

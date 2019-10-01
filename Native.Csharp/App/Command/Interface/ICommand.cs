@@ -9,7 +9,7 @@ namespace Native.Csharp.App.Command.Interface
 {
     public interface ICommand
     {
-        void Execute(Player sender, String[] args);
+        void Execute(Player sender, string[] args);
         PlayerCommandHandler Register();
         
     }

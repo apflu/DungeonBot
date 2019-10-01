@@ -16,15 +16,15 @@ namespace Native.Csharp.App.Commands.PointCommand
     {
         public void Execute(Player sender, string[] args)
         {
-            //String Locale = LocaleManager.GetCurrentLocale(sender);
+            //string Locale = LocaleManager.GetCurrentLocale(sender);
             if (args == null)
             {
-                Send(sender, sender.GetCurrentGroup(), Dice.GetDice("1d20").ToString());
+                Send(sender, sender.GetCurrentGroup(), Dice.GetDice("1d20").Tostring());
                 
             }
             else
             {
-                Values.messageSender.SendGroupMessage(sender, sender.GetCurrentGroup(), Dice.GetDice(args[0]).ToString());
+                Values.messageSender.SendGroupMessage(sender, sender.GetCurrentGroup(), Dice.GetDice(args[0]).Tostring());
             }
         }
 

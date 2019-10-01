@@ -13,16 +13,16 @@ namespace Native.Csharp.App.Util
         public static Boolean PluginEnabled = false;
 
         //pattern
-        public const String PatternCommand = "^[\\.\\*\\&\\#]";
+        public const string PatternCommand = "^[\\.\\*\\&\\#]";
 
         //SQL
         
 
-        public const String SQL_Credit = "server=127.0.0.1;port=3306;database=DungeonRPG;user=QBot;password=Meowtainaut";
+        public const string SQL_Credit = "server=127.0.0.1;port=3306;database=DungeonRPG;user=QBot;password=Meowtainaut";
 
-        public const String SQL_Command_Status_Get = "SELECT status FROM status WHERE qqid={0}";
-        public const String SQL_Command_Status_Set = "UPDATE status SET status={0} WHERE qqid={0}";
-        public const String SQL_Command_Status_Init = "INSERT INTO status(qq_id, status) VALUES({0}, {0})";
+        public const string SQL_Command_Status_Get = "SELECT status FROM status WHERE qqid={0}";
+        public const string SQL_Command_Status_Set = "UPDATE status SET status={0} WHERE qqid={0}";
+        public const string SQL_Command_Status_Init = "INSERT INTO status(qq_id, status) VALUES({0}, {0})";
         
 
         private static ConnectManager connectManager;

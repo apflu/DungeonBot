@@ -10,18 +10,18 @@ namespace Native.Csharp.App.Util.Message
 {
     public class MessageSender
     {
-        public void SendGroupMessage(long group, String message)
+        public void SendGroupMessage(long group, string message)
         {
             Send(group, new MessagePlain(message));
         }
 
-        public void SendGroupMessage(Player target, String message)
+        public void SendGroupMessage(Player target, string message)
         {
             Send(target.GetCurrentGroup(), new MessagePlain(message));
 
         }
 
-        public void SendGroupMessage(Player target, String message, Boolean isPresetMessage)
+        public void SendGroupMessage(Player target, string message, Boolean isPresetMessage)
         {
             if (isPresetMessage == false)
             {
@@ -34,7 +34,7 @@ namespace Native.Csharp.App.Util.Message
 
         private void Send(long group, MessagePlain message)
         {
-            Common.CqApi.SendGroupMessage(group, message.ToString());
+            Common.CqApi.SendGroupMessage(group, message.Tostring());
         }
     }
 }

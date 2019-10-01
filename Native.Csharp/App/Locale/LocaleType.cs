@@ -8,11 +8,11 @@ namespace Native.Csharp.App.Locale
 {
     public class LocaleType
     {
-        private String type;
+        private string type;
 
         public readonly LocaleType Type_None = new LocaleType("none");
 
-        private LocaleType(String type)
+        private LocaleType(string type)
         {
             this.type = type;
         }
