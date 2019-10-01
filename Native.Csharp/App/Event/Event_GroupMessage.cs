@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Native.Csharp.App.EventArgs;
 using Native.Csharp.App.Interface;
 using Native.Csharp.App.Util;
@@ -17,10 +17,9 @@ namespace Native.Csharp.App.Event
                 Values.GetCommandHandler().Execute(message);
         }
 
-        private Boolean IsCommand(String message)
+        private Boolean IsCommand(string message)
         {
-            //TODO
-            return (true);
+            return Regex.IsMatch(message, Values.PatternCommand);
         }
     }
 }
