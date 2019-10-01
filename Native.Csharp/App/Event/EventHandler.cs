@@ -40,7 +40,7 @@ namespace Native.Csharp.App.Event
         //time event
         //public delegate void NextMinuteHandler();
         //public delegate void NextDayHandler();
-        
+
         //events
         private event PlayerCommandHandler PlayerCommandEvent;
         private event PluginStartUpHandler PluginStartUpEvent;

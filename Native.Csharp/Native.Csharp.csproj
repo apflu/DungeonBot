@@ -108,6 +108,7 @@
     <Compile Include="App\Command\Player.cs" />
     <Compile Include="App\Commands\PointCommand\RollDiceCommand.cs" />
     <Compile Include="App\Commands\PointCommand\HelpCommand.cs" />
+    <Compile Include="App\Command\PlayerData.cs" />
     <Compile Include="App\Common.cs" />
     <Compile Include="App\Core\LibExport.cs">
       <AutoGen>True</AutoGen>
@@ -176,7 +177,7 @@
     <Compile Include="App\Interface\IReceiveGroupPrivateMessage.cs" />
     <Compile Include="App\Interface\IReceiveOnlineStatusMessage.cs" />
     <Compile Include="App\Command\Interface\ICommandIgnoreStatus.cs" />
-    <Compile Include="App\Locale\LocaleHandler.cs" />
+    <Compile Include="App\Locale\LocaleManager.cs" />
     <Compile Include="App\Locale\LocaleType.cs" />
     <Compile Include="App\Util\Message\MessageSender.cs" />
     <Compile Include="App\Util\Message\MessageType.cs" />

@@ -19,18 +19,23 @@ namespace Native.Csharp.App.Commands.PointCommand
             //String Locale = LocaleManager.GetCurrentLocale(sender);
             if (args == null)
             {
-                Values.messageSender.SendGroupMessage(sender, sender.GetCurrentGroup(), Dice.GetDice("1d20").ToString());
+                Send(sender, sender.GetCurrentGroup(), Dice.GetDice("1d20").ToString());
                 
             }
             else
             {
-
+                Values.messageSender.SendGroupMessage(sender, sender.GetCurrentGroup(), Dice.GetDice(args[0]).ToString());
             }
         }
 
         public PlayerCommandHandler Register()
         {
             return new PlayerCommandHandler(Execute);
+        }
+
+        private void Send(Player target, long group, string message)
+        {
+            Values.messageSender.SendGroupMessage(target, group, message);
         }
     }
 }
