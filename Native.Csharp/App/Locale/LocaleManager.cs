@@ -1,4 +1,5 @@
 ﻿using Native.Csharp.App.Command;
+using Native.Csharp.App.Util.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +12,16 @@ namespace Native.Csharp.App.Locale
     {
         String[] Locales;
 
-        public String GetCurrentLocale(Player player)
-        {
-            return "";
-        }
-
         public String Parse(String Locale)
         {
             return "";
         }
 
-        public String Format(String messagePreset, LocaleType locale)
+        public MessagePlain Format(String messagePreset, LocaleType locale)
         {
             
 
-            return "";
+            return new MessagePlain("");
         }
     }
 }

@@ -10,23 +10,31 @@ namespace Native.Csharp.App.Util.Message
 {
     public class MessageSender
     {
-        public void SendGroupMessage(Player target, long group, String message)
+        public void SendGroupMessage(long group, String message)
         {
-            Common.CqApi.SendGroupMessage(group, message);
+            Send(group, new MessagePlain(message));
+        }
+
+        public void SendGroupMessage(Player target, String message)
+        {
+            Send(target.GetCurrentGroup(), new MessagePlain(message));
 
         }
 
-        public void SendGroupMessage(Player target, long group, String message, Boolean isPresetMessage)
+        public void SendGroupMessage(Player target, String message, Boolean isPresetMessage)
         {
-            //LocaleType Locale = Player.GetCurrentLocale(target);
-            //Common.CqApi.SendGroupMessage(new MessagePlain(message));
-
-
+            if (isPresetMessage == false)
+            {
+                Send(target.GetCurrentGroup(), new MessagePlain(message));
+            } else
+            {
+                Send(target.GetCurrentGroup(), Values.GetLocaleManager().Format(message, target.GetCurrentLocale()));
+            }
         }
 
-        private void Send()
+        private void Send(long group, MessagePlain message)
         {
-
+            Common.CqApi.SendGroupMessage(group, message.ToString());
         }
     }
 }

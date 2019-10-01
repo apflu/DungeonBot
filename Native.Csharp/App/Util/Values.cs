@@ -3,6 +3,7 @@ using System;
 
 using Native.Csharp.App.Command;
 using Native.Csharp.App.Util.Message;
+using Native.Csharp.App.Locale;
 
 namespace Native.Csharp.App.Util
 {
@@ -65,6 +66,11 @@ namespace Native.Csharp.App.Util
         public static CommandHandler GetCommandHandler()
         {
             return commandHandler;
+        }
+
+        public static LocaleManager GetLocaleManager()
+        {
+            //TODO
         }
 
 
