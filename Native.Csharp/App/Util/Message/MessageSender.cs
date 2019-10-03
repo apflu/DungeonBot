@@ -34,7 +34,7 @@ namespace Native.Csharp.App.Util.Message
 
         private void Send(long group, MessagePlain message)
         {
-            Common.CqApi.SendGroupMessage(group, message.Tostring());
+            Common.CqApi.SendGroupMessage(group, message.ToString());
         }
     }
 }

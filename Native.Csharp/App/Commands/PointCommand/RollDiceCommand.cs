@@ -19,12 +19,12 @@ namespace Native.Csharp.App.Commands.PointCommand
             //string Locale = LocaleManager.GetCurrentLocale(sender);
             if (args == null)
             {
-                Send(sender, sender.GetCurrentGroup(), Dice.GetDice("1d20").Tostring());
+                Send(sender.GetCurrentGroup(), Dice.GetDice("1d20").ToString());
                 
             }
             else
             {
-                Values.messageSender.SendGroupMessage(sender, sender.GetCurrentGroup(), Dice.GetDice(args[0]).Tostring());
+                Values.messageSender.SendGroupMessage(sender.GetCurrentGroup(), Dice.GetDice(args[0]).ToString());
             }
         }
 
@@ -33,9 +33,9 @@ namespace Native.Csharp.App.Commands.PointCommand
             return new PlayerCommandHandler(Execute);
         }
 
-        private void Send(Player target, long group, string message)
+        private void Send(long group, string message)
         {
-            Values.messageSender.SendGroupMessage(target, group, message);
+            Values.messageSender.SendGroupMessage(group, message);
         }
     }
 }

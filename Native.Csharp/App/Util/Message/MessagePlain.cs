@@ -27,7 +27,7 @@ namespace Native.Csharp.App.Util.Message
             
         }
 
-        public override string Tostring()
+        public override string ToString()
         {
             if (MessageType == MessageType.Type_Text)
             {

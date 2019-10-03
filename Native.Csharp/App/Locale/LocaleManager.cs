@@ -10,18 +10,42 @@ namespace Native.Csharp.App.Locale
 {
     public class LocaleManager
     {
-        string[] Locales;
+        private List<LocaleType> Locales;
 
-        public string Parse(string Locale)
+        public LocaleManager()
         {
-            return "";
+            RegisterLocale(new LocaleZHCN());
         }
 
-        public MessagePlain Format(string messagePreset, LocaleType locale)
+        public string Format(MessagePlain message, LocaleType locale)
         {
-            
+            return locale.GetLocale(message.ToString());
+        }
 
-            return new MessagePlain("");
+        /// <summary>
+        /// 从字符串获取语言文件，没有则返回null
+        /// </summary>
+        /// <param name="type">语言名</param>
+        /// <returns>LocaleType</returns>
+        public LocaleType Parse(string type)
+        {
+            LocaleType result = null;
+            Locales.ForEach(locale =>
+            {
+                if(locale.ToString().Equals(type))
+                {
+                    result = locale;
+                }
+            });
+            return result;
+        }
+
+        public void RegisterLocale(LocaleType locale)
+        {
+            if (!Locales.Contains(locale))
+            {
+                Locales.Add(locale);
+            }
         }
     }
 }

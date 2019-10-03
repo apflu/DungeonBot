@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Locale
 {
-    public class LocaleZHCN
+    public class LocaleZHCN : LocaleType
     {
-        public const string Locale_Command = "命令：";
-        public const string Locale_Description = "描述：";
-        public const string Locale_Usage = "用法：";
+        public LocaleZHCN() : base("ZHCN")
+        {
+        }
 
-        public const string Locale_RollDiceCommand = ".rd";
-        public const string Locale_RollDiceCommand_Description = "进行一次投骰，并输出结果。";
-        public const string Locale_RollDiceCommand_Usage = ".rd [数量]d[大小] 例如：.rd 1d20";
+        public new const string Locale_Command = "命令：";
+        public new const string Locale_Description = "描述：";
+        public new const string Locale_Usage = "用法：";
+
+        public new const string Locale_RollDiceCommand = ".rd";
+        public new const string Locale_RollDiceCommand_Description = "进行一次投骰，并输出结果。";
+        public new const string Locale_RollDiceCommand_Usage = ".rd [数量]d[大小] 例如：.rd 1d20";
 
     }
 }

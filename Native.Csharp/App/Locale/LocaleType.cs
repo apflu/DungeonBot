@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,13 +9,29 @@ namespace Native.Csharp.App.Locale
 {
     public class LocaleType
     {
-        private string type;
+        protected readonly string type;
 
-        public readonly LocaleType Type_None = new LocaleType("none");
+        public const string Locale_Command = "";
+        public const string Locale_Description = "";
+        public const string Locale_Usage = "";
 
-        private LocaleType(string type)
+        public const string Locale_RollDiceCommand = "";
+        public const string Locale_RollDiceCommand_Description = "";
+        public const string Locale_RollDiceCommand_Usage = "";
+
+        protected LocaleType(string type)
         {
             this.type = type;
+        }
+
+        public override string ToString()
+        {
+            return type;
+        }
+
+        public string GetLocale(string localeString)
+        {
+            return GetType().GetField(localeString).GetValue(null).ToString();
         }
     }
 }

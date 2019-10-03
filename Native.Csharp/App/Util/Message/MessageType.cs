@@ -18,7 +18,7 @@ namespace Native.Csharp.App.Util.Message
             this.type = type;
         }
 
-        public override string Tostring()
+        public override string ToString()
         {
             return type;
         }
