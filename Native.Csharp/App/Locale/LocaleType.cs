@@ -18,6 +18,7 @@ namespace Native.Csharp.App.Locale
         public const string Locale_RollDiceCommand = "";
         public const string Locale_RollDiceCommand_Description = "";
         public const string Locale_RollDiceCommand_Usage = "";
+        public const string Locale_RollDiceCommand_Result = "";
 
         protected LocaleType(string type)
         {
