@@ -28,8 +28,8 @@ namespace Native.Csharp.App.Util
         private static ConnectManager connectManager;
         private static Event.EventHandler eventHandler;
         private static CommandHandler commandHandler;
-        
-        public static MessageSender messageSender { get; set; }
+        private static LocaleManager localeManager;
+        private static MessageSender messageSender;
 
         /// <summary>
         /// read-only, no longer avaliable after it's set
@@ -68,11 +68,27 @@ namespace Native.Csharp.App.Util
             return commandHandler;
         }
 
-        public static LocaleManager GetLocaleManager()
+        public static void SetLocaleManager(LocaleManager manager)
         {
-            //TODO
+            if (localeManager == null)
+                localeManager = manager;
         }
 
+        public static LocaleManager GetLocaleManager()
+        {
+            return localeManager;
+        }
+
+        public static void SetMessageSender(MessageSender sender)
+        {
+            if (messageSender == null)
+                messageSender = sender;
+        }
+
+        public static MessageSender GetMessageSender()
+        {
+            return messageSender;
+        }
 
     }
 }
