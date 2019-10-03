@@ -9,9 +9,9 @@ namespace Native.Csharp.App.Util.Message
 {
     public class MessagePlain
     {
-        private MessageType MessageType;
-        private string Message;
-        private LocaleType Locale;
+        private readonly MessageType MessageType;
+        private readonly string Message;
+        private readonly LocaleType Locale;
 
 
         public MessagePlain(string message)
@@ -23,8 +23,8 @@ namespace Native.Csharp.App.Util.Message
         public MessagePlain(string messagePreset, LocaleType locale)
         {
             MessageType = MessageType.Type_Preset_Message;
-            
-            
+            Message = messagePreset;
+            Locale = locale;
         }
 
         public override string ToString()
@@ -34,7 +34,7 @@ namespace Native.Csharp.App.Util.Message
                 return Message;
             } else if (MessageType == MessageType.Type_Preset_Message)
             {
-                
+                return Values.GetLocaleManager().Format(Message, Locale);
             }
             return null;
         }

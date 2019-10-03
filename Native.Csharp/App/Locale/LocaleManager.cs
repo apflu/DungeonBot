@@ -17,9 +17,9 @@ namespace Native.Csharp.App.Locale
             RegisterLocale(new LocaleZHCN());
         }
 
-        public string Format(MessagePlain message, LocaleType locale)
+        public string Format(string message, LocaleType locale)
         {
-            return locale.GetLocale(message.ToString());
+            return locale.GetLocale(message);
         }
 
         /// <summary>
