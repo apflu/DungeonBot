@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Native.Csharp</RootNamespace>
-    <AssemblyName>Native.Csharp</AssemblyName>
+    <AssemblyName>com.apflu.dungeonbot</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -61,6 +61,9 @@
       <Private>False</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -99,6 +102,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\Command\AbandonItemCommand.cs" />
+    <Compile Include="App\Command\DebugCommand.cs" />
+    <Compile Include="App\Command\MultipleGatherHerbCommand.cs" />
+    <Compile Include="App\Command\Tools\CommandHandler.cs" />
+    <Compile Include="App\Command\GatherHerbCommand.cs" />
+    <Compile Include="App\Command\Tools\ICommand.cs" />
+    <Compile Include="App\Command\ShowInventoryCommand.cs" />
     <Compile Include="App\Common.cs" />
     <Compile Include="App\Core\LibExport.cs">
       <AutoGen>True</AutoGen>
@@ -115,11 +125,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StatusExport.tt</DependentUpon>
     </Compile>
+    <Compile Include="App\Data\SqlHandler.cs" />
+    <Compile Include="App\Event\EventProcessor.cs" />
+    <Compile Include="App\Event\Event_AppMain.cs" />
     <Compile Include="App\Event\Event_CqAppDisable.cs" />
     <Compile Include="App\Event\Event_CqAppEnable.cs" />
-    <Compile Include="App\Event\Event_AppMain.cs" />
     <Compile Include="App\Event\Event_CqExit.cs" />
     <Compile Include="App\Event\Event_CqStartup.cs" />
+    <Compile Include="App\Event\Event_GroupMessage.cs" />
+    <Compile Include="App\Gameplay\Character.cs" />
+    <Compile Include="App\Gameplay\Generator\ItemGenerator.cs" />
+    <Compile Include="App\Gameplay\Handler\ActionHandler.cs" />
+    <Compile Include="App\Gameplay\Handler\CharacterHandler.cs" />
+    <Compile Include="App\Gameplay\Handler\HerbHandler.cs" />
+    <Compile Include="App\Gameplay\Handler\ItemHandler.cs" />
+    <Compile Include="App\Gameplay\Handler\PlayerHandler.cs" />
+    <Compile Include="App\Gameplay\Inventory.cs" />
+    <Compile Include="App\Gameplay\Item.cs" />
+    <Compile Include="App\Gameplay\ItemStack.cs" />
+    <Compile Include="App\Gameplay\Player.cs" />
+    <Compile Include="App\Gameplay\CharacterFlag.cs" />
+    <Compile Include="App\Plugin.cs" />
+    <Compile Include="App\UserInteract\Locale.cs" />
+    <Compile Include="App\UserInteract\MessageSender.cs" />
+    <Compile Include="App\Util\Possibility.cs" />
+    <Compile Include="App\Util\RandomTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repair\Core\Kernel32.cs" />
     <Compile Include="Repair\Enum\LoadLibraryFlags.cs" />
@@ -128,7 +158,8 @@
     <Compile Include="Repair\ModuleInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Native.Csharp.json">
+    <None Include="app.config" />
+    <None Include="com.apflu.dungeonbot.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

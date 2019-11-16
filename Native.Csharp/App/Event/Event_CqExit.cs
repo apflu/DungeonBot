@@ -18,7 +18,7 @@ namespace Native.Csharp.App.Event
 		/// </summary>
 		/// <param name="sender">事件的触发对象</param>
 		/// <param name="e">事件的附加参数</param>
-        public void CqExit (object sender, CqExitEventArgs e)
+        public void CqExit(object sender, CqExitEventArgs e)
         {
             // 本方法会在酷Q【主线程】中被调用。
             // 无论本应用是否被启用，本方法都会在酷Q退出前执行一次，请在这里执行插件关闭代码。

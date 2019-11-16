@@ -18,7 +18,7 @@ namespace Native.Csharp.App.Event
 		/// </summary>
 		/// <param name="sender">事件的触发对象</param>
 		/// <param name="e">事件的附加参数</param>
-        public void CqAppDisable (object sender, CqAppDisableEventArgs e)
+        public void CqAppDisable(object sender, CqAppDisableEventArgs e)
         {
             // 当应用被停用前，本方法将被调用一次
             // 如果酷Q载入时应用已被停用，则本方法【不会】被调用。
