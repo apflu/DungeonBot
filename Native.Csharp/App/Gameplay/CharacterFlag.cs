@@ -18,6 +18,7 @@ namespace Native.Csharp.App.Gameplay
         public const string FlagTypeCharacter = "TypeCharacter";
 
         //flag内容
+        public const string JobNone = "None";
         public const string JobGatherHerb = "GatherHerb";
 
         public const string TypeTemp = "Temp";
