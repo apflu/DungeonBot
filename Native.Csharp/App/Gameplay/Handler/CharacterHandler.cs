@@ -11,7 +11,7 @@ namespace Native.Csharp.App.Gameplay.Handler
     {
         private ArrayList Characters;
 
-        public const int MaxCharactersAllowed = 3;
+        
 
         /// <summary>
         /// 默认构造方法
@@ -24,29 +24,40 @@ namespace Native.Csharp.App.Gameplay.Handler
         
         public Character[] GetCharacters(Player player)
         {
-            Character[] result = new Character[MaxCharactersAllowed];
+            Character[] result = new Character[player.MaxCharactersAllowed];
 
-            //TODO
+            int i = 0;
+            foreach(Character character in Characters)
+                if (character.Owner == player)
+                    result[i++] = character;
 
             return result;
         }
 
         /// <summary>
         /// 判断一名角色是否已注册
-        /// 如果角色有flag
         /// </summary>
         /// <param name="character"></param>
         /// <returns></returns>
         public bool IsExist(Character character)
         {
-            //TODO
+            foreach (Character c in Characters)
+                if (c == character)
+                    return true;
+            return false;
         }
 
+        /// <summary>
+        /// 注册一名角色
+        /// 注意：玩家角色请使用Player.AddCharacter(Character)！
+        /// </summary>
+        /// <param name="character"></param>
+        /// <returns></returns>
         public bool Register(Character character)
         {
-            if(IsExist(character))
+            if(!IsExist(character))
             {
-                //TODO
+                Characters.Add(character);
                 return true;
             }
             return false;
@@ -56,15 +67,18 @@ namespace Native.Csharp.App.Gameplay.Handler
         {
             if (IsExist(character))
             {
-                //TODO
+                Characters.Remove(character);
                 return true;
             }
             return false;
         }
 
-        public Character Parse()
+        public Character Parse(string name)
         {
-            //TODO
+            foreach (Character character in Characters)
+                if (character.Name == name)
+                    return character;
+            return null;
         }
     }
 }

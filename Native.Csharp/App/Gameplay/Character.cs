@@ -10,16 +10,31 @@ namespace Native.Csharp.App.Gameplay
     public class Character
     {
         //TODO: 继承ICloneable
+
+        //private int cid;
         public Inventory Inventory { get; protected set; }
         public string Name { get; protected set; }
+        public Player Owner { get; protected set; }
+
         public string IsCharacterFinished { get; protected set; }
         protected DateTime NextFreeTime { private get; set; }
+        
 
         private ArrayList Flags;
 
+        
+
         public Character(string name)
         {
+            Inventory = new Inventory();
             Name = name;
+            Owner = Plugin.GetPlayerHandler().PlayerWorld;
+        }
+
+        public Character SetOwner(Player owner)
+        {
+            Owner = owner;
+            return this;
         }
 
         /*
@@ -83,29 +98,34 @@ namespace Native.Csharp.App.Gameplay
          * 须知：这些方法仅仅是提供了一些简便方法，以及作为调用/设定Flag的例子，
          * 你仍然可以通过直接访问Flag来做到相同的事情。
          */
+
+
         public bool HasFinishedJob()
         {
-            //TODO
+            return IsDoingJob() && !IsCurrentBusy();
         }
 
         public bool IsDoingJob()
         {
-            //TODO
+            return GetFlag(CharacterFlag.FlagJobCurrent).Content != CharacterFlag.JobNone;
         }
 
         /// <summary>
         /// 注意：先判断是否有正在进行的工作！
+        /// 将会清除现有的工作！
         /// </summary>
         /// <param name="job"></param>
         /// <param name="period"></param>
         public void SetJob(string job, TimeSpan period)
         {
-            //TODO
+            SetFlag(new CharacterFlag(CharacterFlag.FlagJobCurrent, job));
+            AddBusyTime(period);
         }
 
         public void ClearJob()
         {
-            //TODO
+            SetFlag(new CharacterFlag(CharacterFlag.FlagJobCurrent, CharacterFlag.JobNone));
+            NextFreeTime = DateTime.Now;
         }
 
         /*
@@ -120,7 +140,7 @@ namespace Native.Csharp.App.Gameplay
         /// 获取玩家的一项属性
         /// </summary>
         /// <param name="name">属性名</param>
-        /// <returns>nullable</returns>
+        /// <returns>若不存在则为null</returns>
         public CharacterFlag GetFlag(string name)
         {
             foreach (CharacterFlag flag in Flags)

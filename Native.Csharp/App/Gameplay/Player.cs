@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Native.Csharp.App.Gameplay.Handler;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +13,14 @@ namespace Native.Csharp.App.Gameplay
 
         //玩家基础信息
         public long QQID { get; private set; }
-
         public long LastGroupID { get; set; }
-
-        private Character CurrentCharacter;
-
         public Inventory Inventory { get; protected set; }
-
+        public byte MaxCharactersAllowed { get; set; }
         protected DateTime NextFreeTime { private get; set; }
+        private Character CurrentCharacter;
+        
 
-        //玩家标签
+        //玩家信息
         public ArrayList Flags;
 
         /// <summary>
@@ -32,6 +31,7 @@ namespace Native.Csharp.App.Gameplay
         {
             QQID = qqID;
             Inventory = new Inventory();
+            MaxCharactersAllowed = PlayerHandler.DefaultMaxCharactersAllowed;
 
             Flags = new ArrayList();
         }
@@ -87,12 +87,7 @@ namespace Native.Csharp.App.Gameplay
 
         public bool AddCharacter(Character character)
         {
-            //TODO
-        }
-
-        public bool RemoveCharacter(Character character)
-        {
-            //TODO
+            return Plugin.GetCharacterHandler().Register(character.SetOwner(this));
         }
 
         //TODO: 重写Equals(object)方法

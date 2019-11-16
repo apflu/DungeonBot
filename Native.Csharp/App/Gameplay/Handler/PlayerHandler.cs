@@ -10,13 +10,20 @@ namespace Native.Csharp.App.Gameplay.Handler
     public class PlayerHandler
     {
         //临时方法：后续版本将被数据库连接代替
+        public const byte DefaultMaxCharactersAllowed = 3;
+
         public ArrayList Players { get; private set; }
+
+        //玩家World定义：所有NPC都在其名下
+        private const long IDPlayerWorld = 344879070;
+        public Player PlayerWorld;
 
         public PlayerHandler()
         {
+            PlayerWorld = new Player(IDPlayerWorld);
             Players = new ArrayList
             {
-                new Player(1010348055)
+                PlayerWorld
             };
         }
 
