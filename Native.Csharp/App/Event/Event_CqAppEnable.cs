@@ -20,14 +20,25 @@ namespace Native.Csharp.App.Event
             // 如非必要，不建议在这里加载窗口。（可以添加菜单，让用户手动打开窗口）
 
             // 创建公用变量
+            InitObjects();
+            InitValues();
+
+            Common.IsRunning = true;
+            
+        }
+
+        private void InitObjects()
+        {
             Plugin.SetMessageSender(new UserInteract.MessageSender());
             Plugin.SetPlayerHandler(new Gameplay.Handler.PlayerHandler());
             Plugin.SetCommandHandler(new Command.CommandHandler());
             Plugin.SetItemHandler(new Gameplay.Handler.ItemHandler());
             Plugin.SetHerbHandler(new Gameplay.Handler.HerbHandler());
             Plugin.SetCharacterHandler(new Gameplay.Handler.CharacterHandler());
+        }
 
-            Common.IsRunning = true;
+        private void InitValues()
+        {
             
         }
     }
