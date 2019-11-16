@@ -23,13 +23,13 @@ namespace Native.Csharp.App.Gameplay.Handler
         public void GatherHerb(Player sender, int quantity)
         {
             if (quantity > 1)
-                sender.AddBusyTime(new TimeSpan(0, quantity * MinutesGatherMultipleHerb, 0));
+                sender.GetCurrentCharacter().AddBusyTime(new TimeSpan(0, quantity * MinutesGatherMultipleHerb, 0));
             else
-                sender.AddBusyTime(new TimeSpan(0, MinutesGatherSingleHerb, 0));
+                sender.GetCurrentCharacter().AddBusyTime(new TimeSpan(0, MinutesGatherSingleHerb, 0));
 
             //设置正在采集的数量
-            sender.SetFlag(new CharacterFlag("quantityJobGatheringHerb", quantity + ""));
-            sender.SetFlag(new CharacterFlag("currentJob", "GatherHerb"));
+            sender.GetCurrentCharacter().SetFlag(new CharacterFlag("quantityJobGatheringHerb", quantity + ""));
+            sender.GetCurrentCharacter().SetFlag(new CharacterFlag("currentJob", "GatherHerb"));
         }
     }
 }

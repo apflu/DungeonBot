@@ -20,10 +20,10 @@ namespace Native.Csharp.App.Command
             string result = "";
 
             //判断是否忙碌
-            if(sender.IsCurrentBusy())
+            if(sender.GetCurrentCharacter().IsCurrentBusy())
             {
 
-                TimeSpan timeLeft = sender.GetBusyTimeLeft();
+                TimeSpan timeLeft = sender.GetCurrentCharacter().GetBusyTimeLeft();
 
                 if (timeLeft.Hours == 0)
                     result += "你当前正忙！剩余时间：" + timeLeft.Minutes + "分钟" + timeLeft.Seconds + "秒\r\n";
@@ -33,7 +33,7 @@ namespace Native.Csharp.App.Command
             }
             else 
             {
-                CharacterFlag existedJob = sender.GetFlag("quantityJobGatheringHerb");
+                CharacterFlag existedJob = sender.GetCurrentCharacter().GetFlag("quantityJobGatheringHerb");
                 //如果有已完成的草药采集
                 if(existedJob != null)
                 {
@@ -45,7 +45,7 @@ namespace Native.Csharp.App.Command
                         sender.Inventory.AddItem(gatheredItem);
                         result += sender.GetName() + "上次采集到了" + ItemHandler.ConvertToString(gatheredItem) + "！\r\n";
 
-                        sender.SetFlag(new CharacterFlag("quantityJobGatheringHerb", 0 + ""));
+                        sender.GetCurrentCharacter().SetFlag(new CharacterFlag("quantityJobGatheringHerb", 0 + ""));
                     }
                 }
 
