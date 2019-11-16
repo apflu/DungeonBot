@@ -104,7 +104,6 @@
   <ItemGroup>
     <Compile Include="App\Command\AbandonItemCommand.cs" />
     <Compile Include="App\Command\DebugCommand.cs" />
-    <Compile Include="App\Command\MultipleGatherHerbCommand.cs" />
     <Compile Include="App\Command\Tools\CommandHandler.cs" />
     <Compile Include="App\Command\GatherHerbCommand.cs" />
     <Compile Include="App\Command\Tools\ICommand.cs" />
@@ -133,9 +132,11 @@
     <Compile Include="App\Event\Event_CqExit.cs" />
     <Compile Include="App\Event\Event_CqStartup.cs" />
     <Compile Include="App\Event\Event_GroupMessage.cs" />
+    <Compile Include="App\Exception\ActionType.cs" />
+    <Compile Include="App\Exception\InvalidFlagException.cs" />
+    <Compile Include="App\Exception\InvalidInputException.cs" />
     <Compile Include="App\Gameplay\Character.cs" />
     <Compile Include="App\Gameplay\Generator\ItemGenerator.cs" />
-    <Compile Include="App\Gameplay\Handler\ActionHandler.cs" />
     <Compile Include="App\Gameplay\Handler\CharacterHandler.cs" />
     <Compile Include="App\Gameplay\Handler\HerbHandler.cs" />
     <Compile Include="App\Gameplay\Handler\ItemHandler.cs" />

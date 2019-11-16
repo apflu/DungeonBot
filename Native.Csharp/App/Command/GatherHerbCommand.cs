@@ -60,6 +60,13 @@ namespace Native.Csharp.App.Command
             messageSender.Send(sender.LastGroupID, result.TrimEnd('\r', '\n'));
         }
 
+
+        /// <summary>
+        /// 解析命令输入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         private int ParseInput(Player sender, params string[] args)
         {
             MessageSender mSender = Plugin.GetMessageSender();
