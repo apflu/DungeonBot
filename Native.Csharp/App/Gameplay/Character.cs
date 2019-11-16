@@ -72,6 +72,43 @@ namespace Native.Csharp.App.Gameplay
         }
 
         /*
+         * ===========================工作===========================
+         * =                                                        =
+         * =            这里列出了玩家的工作相关方法。              =
+         * =                                                        =
+         * ==========================================================
+         */
+
+        /*
+         * 须知：这些方法仅仅是提供了一些简便方法，以及作为调用/设定Flag的例子，
+         * 你仍然可以通过直接访问Flag来做到相同的事情。
+         */
+        public bool HasFinishedJob()
+        {
+            //TODO
+        }
+
+        public bool IsDoingJob()
+        {
+            //TODO
+        }
+
+        /// <summary>
+        /// 注意：先判断是否有正在进行的工作！
+        /// </summary>
+        /// <param name="job"></param>
+        /// <param name="period"></param>
+        public void SetJob(string job, TimeSpan period)
+        {
+            //TODO
+        }
+
+        public void ClearJob()
+        {
+            //TODO
+        }
+
+        /*
          * ===========================Flag===========================
          * =                                                        =
          * =            这里列出了玩家的Flag相关方法。              =
