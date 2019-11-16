@@ -15,12 +15,13 @@ namespace Native.Csharp.App.Gameplay
         public Inventory Inventory { get; protected set; }
         public string Name { get; protected set; }
         public Player Owner { get; protected set; }
+        public CharacterProperties Properties { get; }
 
         public string IsCharacterFinished { get; protected set; }
         protected DateTime NextFreeTime { private get; set; }
         
 
-        private ArrayList Flags;
+        private readonly ArrayList Flags;
 
         
 
