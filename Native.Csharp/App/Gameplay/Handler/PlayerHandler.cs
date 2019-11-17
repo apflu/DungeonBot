@@ -10,7 +10,7 @@ namespace Native.Csharp.App.Gameplay.Handler
     public class PlayerHandler
     {
         //临时方法：后续版本将被数据库连接代替
-        public const byte DefaultMaxCharactersAllowed = 3;
+        public const byte DefaultMaxCharactersAllowed = 1;
 
         public ArrayList Players { get; private set; }
 
