@@ -12,12 +12,18 @@ namespace Native.Csharp.App.Command
     {
         public void Execute(Player sender, params string[] args)
         {
-            MessageSender mSender = Plugin.GetMessageSender();
             Item item = Plugin.GetItemHandler().Parse(args[1]);
-            if (sender.Inventory.AbandonItems(item))
-                mSender.Send(sender.LastGroupID, "丢弃完成。");
+            Character character = sender.GetCurrentCharacter();
+            if(character != null)
+            {
+                if (character.Inventory.AbandonItems(item))
+                    sender.Reply("丢弃完成。");
+                else
+                    sender.Reply("物品名无效或物品不存在！");
+            }
             else
-                mSender.Send(sender.LastGroupID, "物品名无效或物品不存在！");
+                sender.Reply("你当前没有角色！\r\n" + "使用 *创建角色 来创建一个！");
+
         }
     }
 }
