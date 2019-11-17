@@ -9,7 +9,7 @@ namespace Native.Csharp.App.Gameplay.Handler
 {
     public class CharacterHandler
     {
-        private ArrayList Characters;
+        private readonly ArrayList Characters;
 
         
 

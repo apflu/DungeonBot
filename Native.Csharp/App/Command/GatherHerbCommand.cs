@@ -19,23 +19,25 @@ namespace Native.Csharp.App.Command
 
             string result = "";
 
-            if(sender.GetCurrentCharacter() != null)
+            Character character = sender.GetCurrentCharacter();
+
+            if(character != null)
             {
                 //判断是否忙碌
-                if (sender.GetCurrentCharacter().IsCurrentBusy())
+                if (character.IsCurrentBusy())
                 {
 
-                    TimeSpan timeLeft = sender.GetCurrentCharacter().GetBusyTimeLeft();
+                    TimeSpan timeLeft = character.GetBusyTimeLeft();
 
                     if (timeLeft.Hours == 0)
-                        result += "你当前正忙！剩余时间：" + timeLeft.Minutes + "分钟" + timeLeft.Seconds + "秒\r\n";
+                        result += character.Name + "当前正忙！剩余时间：" + timeLeft.Minutes + "分钟" + timeLeft.Seconds + "秒\r\n";
                     else
-                        result += "你当前正忙！剩余时间：" + timeLeft.Hours + "小时" + timeLeft.Minutes + "分钟" + timeLeft.Seconds + "秒\r\n";
+                        result += character.Name + "当前正忙！剩余时间：" + timeLeft.Hours + "小时" + timeLeft.Minutes + "分钟" + timeLeft.Seconds + "秒\r\n";
 
                 }
                 else
                 {
-                    Flag existedJob = sender.GetCurrentCharacter().GetFlag("quantityJobGatheringHerb");
+                    Flag existedJob = character.GetFlag("quantityJobGatheringHerb");
                     //如果有已完成的草药采集
                     if (existedJob != null)
                     {
@@ -45,9 +47,9 @@ namespace Native.Csharp.App.Command
                             Item[] gatheredItem = Plugin.GetHerbHandler().GetHerb(sender, int.Parse(existedJob.Content));
 
                             sender.Inventory.AddItem(gatheredItem);
-                            result += sender.GetName() + "上次采集到了" + ItemHandler.ConvertToString(gatheredItem) + "！\r\n";
+                            result += character.Name + "上次采集到了" + ItemHandler.ConvertToString(gatheredItem) + "！\r\n";
 
-                            sender.GetCurrentCharacter().SetFlag(new Flag("quantityJobGatheringHerb", 0 + ""));
+                            character.SetFlag(new Flag("quantityJobGatheringHerb", 0 + ""));
                         }
                     }
 
@@ -55,7 +57,7 @@ namespace Native.Csharp.App.Command
                     //执行命令
                     if (quantity > 0)
                     {
-                        result += "正在进行新的采集工作：采集" + quantity + "个草药…\r\n";
+                        result += character.Name + "正在进行新的采集工作：采集" + quantity + "个草药…\r\n";
                         Plugin.GetHerbHandler().GatherHerb(sender, quantity);
                     }
                 }
