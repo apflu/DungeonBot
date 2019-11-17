@@ -16,6 +16,11 @@ namespace Native.Csharp.App
 
         public const string RegularDice = "^\\d+d\\d+$";
 
+        public readonly Flag Flag_ActionHeal; //是一个治疗动作
+        public readonly Flag Flag_FromNature; //来源为自然
+        public readonly Flag Flag_FromTime; //来源为时间流逝
+        public readonly Flag Flag_ObjectCharacter; //目标为角色
+
         public Values()
         {
             dices = new ArrayList
@@ -30,6 +35,11 @@ namespace Native.Csharp.App
                 new Dice(1, 20),
                 new Dice(1, 100)
             };
+
+            Flag_ActionHeal = new Flag(Flag.Action_FlagName_ActionType, Flag.Action_FlagContent_TypeHeal);
+            Flag_FromNature = new Flag(Flag.Action_FlagName_Sender, Flag.Action_FlagContent_SourceNature);
+            Flag_FromTime = new Flag(Flag.Action_FlagName_Sender, Flag.Action_FlagContent_SourceTime);
+            Flag_ObjectCharacter = new Flag(Flag.Action_FlagName_Object, Flag.Action_FlagContent_SourceCharacter);
         }
 
         public Dice GetDice(string target)
