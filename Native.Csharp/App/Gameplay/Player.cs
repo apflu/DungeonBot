@@ -35,6 +35,15 @@ namespace Native.Csharp.App.Gameplay
             Flags = new ArrayList();
         }
 
+        /// <summary>
+        /// 对该名玩家回复一条消息
+        /// </summary>
+        /// <param name="message"></param>
+        public void Reply(string message)
+        {
+            Plugin.GetMessageSender().Send(LastGroupID, message);
+        }
+
         /*
          * ===========================基础信息===========================
          * =                                                            =
