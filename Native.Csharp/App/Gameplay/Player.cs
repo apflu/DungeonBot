@@ -16,6 +16,9 @@ namespace Native.Csharp.App.Gameplay
         public long LastGroupID { get; set; }
         public Inventory Inventory { get; protected set; }
         public byte MaxCharactersAllowed { get; set; }
+
+        public byte[] PendingCharacter;
+
         private Character CurrentCharacter;
         
 
