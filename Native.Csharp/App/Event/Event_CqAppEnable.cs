@@ -1,5 +1,7 @@
 ﻿using Native.Csharp.Sdk.Cqp.EventArgs;
 using Native.Csharp.Sdk.Cqp.Interface;
+using Native.Csharp.App.Util;
+using System.Collections;
 
 namespace Native.Csharp.App.Event
 {
@@ -39,7 +41,7 @@ namespace Native.Csharp.App.Event
 
         private void InitValues()
         {
-            
+            Plugin.Values = new Values();
         }
     }
 }
