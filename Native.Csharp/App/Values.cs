@@ -1,4 +1,5 @@
-﻿using Native.Csharp.App.Util;
+﻿using Native.Csharp.App.Gameplay;
+using Native.Csharp.App.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ namespace Native.Csharp.App
 
         public const string RegularDice = "^\\d+d\\d+$";
 
+        public readonly ActionSource SourceSelf;
+        public readonly ActionSource SourceEnvironment;
+        public readonly ActionSource SourceTime;
+
         public Values()
         {
             dices = new ArrayList
@@ -29,6 +34,10 @@ namespace Native.Csharp.App
                 new Dice(1, 20),
                 new Dice(1, 100)
             };
+
+            SourceSelf = new ActionSource(ActionSource.TypeSelf);
+            SourceEnvironment = new ActionSource(ActionSource.TypeEnvironment);
+            SourceTime = new ActionSource(ActionSource.TypeTime);
         }
 
         public Dice GetDice(string target)

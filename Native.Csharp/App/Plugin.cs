@@ -19,7 +19,7 @@ namespace Native.Csharp.App
         private static HerbHandler herbHandler;
         private static CharacterHandler characterHandler;
 
-
+        public static Values Values;
 
         /*
          * ===========================变量Getter/Setter区域===========================

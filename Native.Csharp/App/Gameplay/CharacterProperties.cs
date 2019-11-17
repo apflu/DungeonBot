@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Native.Csharp.App.Gameplay.Spell;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,6 +58,11 @@ namespace Native.Csharp.App.Gameplay
                 (HPMax > 0) &&
                 (HPCurrent > 0)
                 );
+        }
+
+        public void AddHP(int amount, bool isExceedHPTempHP = false)
+        {
+
         }
     }
 }

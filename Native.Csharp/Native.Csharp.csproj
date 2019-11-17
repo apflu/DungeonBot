@@ -135,6 +135,7 @@
     <Compile Include="App\Exception\ActionType.cs" />
     <Compile Include="App\Exception\InvalidFlagException.cs" />
     <Compile Include="App\Exception\InvalidInputException.cs" />
+    <Compile Include="App\Gameplay\ActionSource.cs" />
     <Compile Include="App\Gameplay\Character.cs" />
     <Compile Include="App\Gameplay\CharacterProperties.cs" />
     <Compile Include="App\Gameplay\Generator\ItemGenerator.cs" />
@@ -154,7 +155,7 @@
     <Compile Include="App\Util\DiceResult.cs" />
     <Compile Include="App\Util\Possibility.cs" />
     <Compile Include="App\Util\RandomTable.cs" />
-    <Compile Include="App\Util\Values.cs" />
+    <Compile Include="App\Values.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repair\Core\Kernel32.cs" />
     <Compile Include="Repair\Enum\LoadLibraryFlags.cs" />
@@ -193,7 +194,9 @@
     </Content>
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App\Gameplay\Spell\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ImportGroup Label=".NET DllExport" />
   <ImportGroup Label=".NET DllExport" />
