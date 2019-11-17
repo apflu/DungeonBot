@@ -17,6 +17,7 @@ namespace Native.Csharp.App.Command
                 if (sender.PendingCharacter == null)
                     new CreateCharacterCommand().Execute(sender, args);
                 sender.AddCharacter(new Character(args[1], sender.PendingCharacter));
+                sender.PendingCharacter = null;
                 sender.Reply("你成功创建了角色" + args[1] + "!");
             }
         }
@@ -33,7 +34,12 @@ namespace Native.Csharp.App.Command
                 sender.Reply("角色名不能包含空格！");
                 return false;
             }
-            if(Regex.IsMatch(args[1], Values.RegexCharacterName))
+            if(Regex.IsMatch(args[1], "多长") || (args[1].Length > 8))
+            {
+                sender.Reply("角色名过长！");
+                return false;
+            }
+            if(!Regex.IsMatch(args[1], Values.RegexCharacterName))
             {
                 sender.Reply("角色名只能包含汉字！");
                 return false;
