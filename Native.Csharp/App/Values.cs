@@ -14,7 +14,8 @@ namespace Native.Csharp.App
     {
         public ArrayList dices;
 
-        public const string RegularDice = "^\\d+d\\d+$";
+        public const string RegexDice = "^\\d+d\\d+$";
+        public const string RegexCharacterName = "^[\\u4e00-\\u9fa5]+$";
 
         public readonly Flag Flag_ActionHeal; //是一个治疗动作
         public readonly Flag Flag_FromNature; //来源为自然
@@ -44,7 +45,7 @@ namespace Native.Csharp.App
 
         public Dice GetDice(string target)
         {
-            MatchCollection matches = Regex.Matches(target, RegularDice);
+            MatchCollection matches = Regex.Matches(target, RegexDice);
 
             if (matches.Count > 0)
             {

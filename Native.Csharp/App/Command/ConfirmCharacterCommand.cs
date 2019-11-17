@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Native.Csharp.App.Gameplay;
 
@@ -30,6 +31,11 @@ namespace Native.Csharp.App.Command
             if(args.Length > 2)
             {
                 sender.Reply("角色名不能包含空格！");
+                return false;
+            }
+            if(Regex.IsMatch(args[1], Values.RegexCharacterName))
+            {
+                sender.Reply("角色名只能包含汉字！");
                 return false;
             }
             if(Plugin.GetCharacterHandler().Parse(args[1]) != null)
