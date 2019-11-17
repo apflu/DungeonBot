@@ -15,8 +15,6 @@ namespace Native.Csharp.App.Command
 
         public void Execute(Player sender, params string[] args)
         {
-            MessageSender messageSender = Plugin.GetMessageSender();
-
             string result = "";
 
             Character character = sender.GetCurrentCharacter();
@@ -25,11 +23,7 @@ namespace Native.Csharp.App.Command
             {
                 //判断是否忙碌
                 if (character.IsCurrentBusy())
-                {
-
                     sender.Reply(character.GetBusyTimeLeft(true));
-
-                }
                 else
                 {
                     Flag existedJob = character.GetFlag("quantityJobGatheringHerb");
@@ -56,10 +50,10 @@ namespace Native.Csharp.App.Command
                         Plugin.GetHerbHandler().GatherHerb(sender, quantity);
                     }
                 }
-                messageSender.Send(sender.LastGroupID, result.TrimEnd('\r', '\n'));
+                sender.Reply(result.TrimEnd('\r', '\n'));
             }
             else
-                messageSender.Send(sender.LastGroupID, "你当前没有角色！\r\n" + "使用 *创建角色 来创建一个！");
+                sender.Reply("你当前没有角色！\r\n" + "使用 *创建角色 来创建一个！");
         }
             
 
