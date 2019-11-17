@@ -11,6 +11,14 @@ namespace Native.Csharp.App.Gameplay
         public string Name { get; private set; }
         public string Content { get; set; }
 
+        /*
+         * ===========================角色Flag===========================
+         * =                                                            =
+         * =            这里列出了玩家的角色相关Flag。                  =
+         * =                                                            =
+         * ==============================================================
+         */
+
         //flag名
         public const string Char_FlagName_JobCurrent = "JobCurrent";
         public const string Char_FlagName_JobHerb_Amount = "JobHerbAmount";
@@ -25,6 +33,27 @@ namespace Native.Csharp.App.Gameplay
         public const string Char_FlagContent_TypePlayer = "Player";
         public const string Char_FlagContent_TypeFriendly = "Friendly"; //NPC use only
         public const string Char_FlagContent_TypeEnemy = "Enemy";
+
+        /*
+         * ===========================动作Flag===========================
+         * =                                                            =
+         * =            这里列出了玩家的动作相关Flag。                  =
+         * =                                                            =
+         * ==============================================================
+         */
+
+        //flag名
+        public const string Action_FlagName_Type = "Type";
+        public const string Action_FlagName_ActionSource = "Source";
+
+        //flag内容
+        public const string Action_FlagContent_TypeHeal = "Heal";
+        public const string Action_FlagContent_TypeAttack = "Attack";
+
+        public const string Action_FlagContent_SourceSelf = "Self";
+        public const string Action_FlagContent_SourceNature = "Nature";
+        public const string Action_FlagContent_SourceCharacter = "Character";
+
 
 
         /// <summary>
