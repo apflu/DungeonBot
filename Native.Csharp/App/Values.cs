@@ -16,10 +16,6 @@ namespace Native.Csharp.App
 
         public const string RegularDice = "^\\d+d\\d+$";
 
-        public readonly GameAction SourceSelf;
-        public readonly GameAction SourceEnvironment;
-        public readonly GameAction SourceTime;
-
         public Values()
         {
             dices = new ArrayList
@@ -34,10 +30,6 @@ namespace Native.Csharp.App
                 new Dice(1, 20),
                 new Dice(1, 100)
             };
-
-            SourceSelf = new GameAction(GameAction.TypeSelf);
-            SourceEnvironment = new GameAction(GameAction.TypeEnvironment);
-            SourceTime = new GameAction(GameAction.TypeTime);
         }
 
         public Dice GetDice(string target)
