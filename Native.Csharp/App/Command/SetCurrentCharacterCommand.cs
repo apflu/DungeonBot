@@ -12,10 +12,17 @@ namespace Native.Csharp.App.Command
         Character character;
         public void Execute(Player sender, params string[] args)
         {
-            if(IsInputValid(sender, args))
+            if (IsInputValid(sender, args))
             {
-                sender.SetCurrentCharacter(character);
-                sender.Reply("已指定当前角色为" + character.Name);
+                if (sender.GetCurrentCharacter() != character)
+                {
+                    sender.SetCurrentCharacter(character);
+                    sender.Reply("已指定当前角色为" + character.Name);
+                }
+                else
+                { //搞事情？
+
+                }
             }
         }
 
