@@ -22,7 +22,7 @@ namespace Native.Csharp.App.Util
 
         public DiceResult GetResult()
         {
-            string strResult = Quantity + "d" + Size + "=";
+            string strResult = ToString() + "=";
             int intResult = 0;
             int result;
             for(int i = 0; i < Quantity; i++)
@@ -32,6 +32,11 @@ namespace Native.Csharp.App.Util
                 intResult += result;
             }
             return new DiceResult(strResult.TrimEnd('+'), intResult);
+        }
+
+        public override string ToString()
+        {
+            return Quantity + "d" + Size;
         }
     }
 }
