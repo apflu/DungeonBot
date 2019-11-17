@@ -11,10 +11,10 @@ namespace Native.Csharp.App.Command
     {
         public void Execute(Player sender, params string[] args)
         {
-            if (sender.PendingCharacter == null)
-                new CreateCharacterCommand().Execute(sender, args);
             if (IsInputValid(sender, args))
             {
+                if (sender.PendingCharacter == null)
+                    new CreateCharacterCommand().Execute(sender, args);
                 sender.AddCharacter(new Character(args[1], sender.PendingCharacter));
                 sender.Reply("你成功创建了角色" + args[1] + "!");
             }
