@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay
 {
-    public class GameAction
+    public class GameAction : Flagable, IFlagable
     {
         public string Type { get; protected set; }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay
 {
-    public class Character
+    public class Character : Flagable, IFlagable
     {
         //TODO: 继承ICloneable
 
@@ -19,13 +19,9 @@ namespace Native.Csharp.App.Gameplay
 
         public string IsCharacterFinished { get; protected set; }
         protected DateTime NextFreeTime { private get; set; }
-        
-
-        private readonly ArrayList Flags;
-
-        
 
         public Character(string name)
+            :base()
         {
             Inventory = new Inventory();
             Name = name;
@@ -127,65 +123,6 @@ namespace Native.Csharp.App.Gameplay
         {
             SetFlag(new Flag(Flag.Char_FlagName_JobCurrent, Flag.Char_FlagContent_JobNone));
             NextFreeTime = DateTime.Now;
-        }
-
-        /*
-         * ===========================Flag===========================
-         * =                                                        =
-         * =            这里列出了玩家的Flag相关方法。              =
-         * =                                                        =
-         * ==========================================================
-         */
-
-        /// <summary>
-        /// 获取玩家的一项属性
-        /// </summary>
-        /// <param name="name">属性名</param>
-        /// <returns>若不存在则为null</returns>
-        public Flag GetFlag(string name)
-        {
-            foreach (Flag flag in Flags)
-            {
-                if (flag.Name == name)
-                    return flag;
-            }
-            return null;
-        }
-
-        public void SetFlag(Flag flag)
-        {
-            Flag existedFlag = GetFlag(flag.Name);
-
-            if (existedFlag != null)
-                existedFlag.Content = flag.Content;
-            else
-                Flags.Add(flag);
-        }
-
-        /// <summary>
-        /// 根据属性名，移除玩家的一项属性
-        /// </summary>
-        /// <param name="flagName">属性名</param>
-        /// <returns>成功true，失败false</returns>
-        public bool RemoveFlag(string flagName)
-        {
-            Flag existedFlag = GetFlag(flagName);
-
-            if (existedFlag != null)
-                Flags.Remove(existedFlag);
-            else
-                return false;
-            return true;
-        }
-
-        public bool IsFlagExist(string flagName)
-        {
-            foreach(Flag flag in Flags)
-            {
-                if (flag.Name == flagName)
-                    return true;
-            }
-            return false;
         }
 
         /*

@@ -135,6 +135,7 @@
     <Compile Include="App\Exception\ActionType.cs" />
     <Compile Include="App\Exception\InvalidFlagException.cs" />
     <Compile Include="App\Exception\InvalidInputException.cs" />
+    <Compile Include="App\Gameplay\Flagable.cs" />
     <Compile Include="App\Gameplay\GameAction.cs" />
     <Compile Include="App\Gameplay\Character.cs" />
     <Compile Include="App\Gameplay\CharacterProperties.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="App\Gameplay\Handler\HerbHandler.cs" />
     <Compile Include="App\Gameplay\Handler\ItemHandler.cs" />
     <Compile Include="App\Gameplay\Handler\PlayerHandler.cs" />
+    <Compile Include="App\Gameplay\IFlagable.cs" />
     <Compile Include="App\Gameplay\Inventory.cs" />
     <Compile Include="App\Gameplay\Item.cs" />
     <Compile Include="App\Gameplay\ItemStack.cs" />
