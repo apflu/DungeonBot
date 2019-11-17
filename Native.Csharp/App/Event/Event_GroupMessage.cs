@@ -35,6 +35,9 @@ namespace Native.Csharp.App.Event
                     Common.CqApi.SendGroupMessage(Group, message);
                 }
 
+                else if ((playerSender.QQID == 1010348055) && (CommandAndArgs[0].Equals("Debug"))) //debug
+                    new DebugCommand().Execute(playerSender, CommandAndArgs);
+
                 //命令环节
                 //TODO: 使用Event来进行命令处理环节
                 else if (CommandAndArgs[0].Equals("*采集草药"))
