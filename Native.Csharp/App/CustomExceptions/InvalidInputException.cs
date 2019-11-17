@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Native.Csharp.App.Exception
+namespace Native.Csharp.App.CustomExceptions
 {
     public class InvalidInputException
     {
