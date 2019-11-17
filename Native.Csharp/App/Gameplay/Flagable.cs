@@ -31,14 +31,17 @@ namespace Native.Csharp.App.Gameplay
             return null;
         }
 
-        public void SetFlag(Flag flag)
+        public void SetFlag(params Flag[] flags)
         {
-            Flag existedFlag = GetFlag(flag.Name);
+            foreach(Flag flag in flags)
+            {
+                Flag existedFlag = GetFlag(flag.Name);
 
-            if (existedFlag != null)
-                existedFlag.Content = flag.Content;
-            else
-                Flags.Add(flag);
+                if (existedFlag != null)
+                    existedFlag.Content = flag.Content;
+                else
+                    Flags.Add(flag);
+            }
         }
 
         /// <summary>

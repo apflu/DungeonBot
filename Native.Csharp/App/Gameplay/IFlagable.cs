@@ -8,7 +8,7 @@ namespace Native.Csharp.App.Gameplay
     public interface IFlagable
     {
         Flag GetFlag(string name);
-        void SetFlag(Flag flag);
+        void SetFlag(params Flag[] flags);
         bool RemoveFlag(string flagName);
         bool IsFlagExist(string flagName);
     }
