@@ -108,7 +108,7 @@ namespace Native.Csharp.App.Gameplay
 
         public bool IsDoingJob()
         {
-            return GetFlag(CharacterFlag.FlagJobCurrent).Content != CharacterFlag.JobNone;
+            return GetFlag(Flag.FlagJobCurrent).Content != Flag.JobNone;
         }
 
         /// <summary>
@@ -119,13 +119,13 @@ namespace Native.Csharp.App.Gameplay
         /// <param name="period"></param>
         public void SetJob(string job, TimeSpan period)
         {
-            SetFlag(new CharacterFlag(CharacterFlag.FlagJobCurrent, job));
+            SetFlag(new Flag(Flag.FlagJobCurrent, job));
             AddBusyTime(period);
         }
 
         public void ClearJob()
         {
-            SetFlag(new CharacterFlag(CharacterFlag.FlagJobCurrent, CharacterFlag.JobNone));
+            SetFlag(new Flag(Flag.FlagJobCurrent, Flag.JobNone));
             NextFreeTime = DateTime.Now;
         }
 
@@ -142,9 +142,9 @@ namespace Native.Csharp.App.Gameplay
         /// </summary>
         /// <param name="name">属性名</param>
         /// <returns>若不存在则为null</returns>
-        public CharacterFlag GetFlag(string name)
+        public Flag GetFlag(string name)
         {
-            foreach (CharacterFlag flag in Flags)
+            foreach (Flag flag in Flags)
             {
                 if (flag.Name == name)
                     return flag;
@@ -152,9 +152,9 @@ namespace Native.Csharp.App.Gameplay
             return null;
         }
 
-        public void SetFlag(CharacterFlag flag)
+        public void SetFlag(Flag flag)
         {
-            CharacterFlag existedFlag = GetFlag(flag.Name);
+            Flag existedFlag = GetFlag(flag.Name);
 
             if (existedFlag != null)
                 existedFlag.Content = flag.Content;
@@ -169,7 +169,7 @@ namespace Native.Csharp.App.Gameplay
         /// <returns>成功true，失败false</returns>
         public bool RemoveFlag(string flagName)
         {
-            CharacterFlag existedFlag = GetFlag(flagName);
+            Flag existedFlag = GetFlag(flagName);
 
             if (existedFlag != null)
                 Flags.Remove(existedFlag);
@@ -180,7 +180,7 @@ namespace Native.Csharp.App.Gameplay
 
         public bool IsFlagExist(string flagName)
         {
-            foreach(CharacterFlag flag in Flags)
+            foreach(Flag flag in Flags)
             {
                 if (flag.Name == flagName)
                     return true;
@@ -196,7 +196,7 @@ namespace Native.Csharp.App.Gameplay
          * ==========================================================
          */
 
-        public void AddHP(int amount, ActionSource source, bool isExceedHPTempHP = false)
+        public void AddHP(int amount, GameAction source, bool isExceedHPTempHP = false)
         {
 
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay
 {
-    public class ActionSource
+    public class GameAction
     {
         public string Type { get; protected set; }
 
@@ -18,12 +18,12 @@ namespace Native.Csharp.App.Gameplay
 
         public Character SourceCharacter;
 
-        public ActionSource(string type)
+        public GameAction(string type)
         {
             Type = type;
         }
 
-        public ActionSource(Character character)
+        public GameAction(Character character)
         {
             Type = TypeCharacter;
             SourceCharacter = character;

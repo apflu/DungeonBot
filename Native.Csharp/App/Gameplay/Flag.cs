@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay
 {
-    public class CharacterFlag
+    public class Flag
     {
         public string Name { get; private set; }
         public string Content { get; set; }
@@ -32,17 +32,17 @@ namespace Native.Csharp.App.Gameplay
         /// </summary>
         /// <param name="name">名字；不能包括空格或分号</param>
         /// <param name="content">内容；不能包括空格或分号</param>
-        public CharacterFlag(string name, string content)
+        public Flag(string name, string content)
         {
             Name = name;
             Content = content;
         }
 
-        public CharacterFlag Parse(string strFlag)
+        public Flag Parse(string strFlag)
         {
             string[] flag = strFlag.TrimEnd(';').Split(' ');
 
-            return new CharacterFlag(flag[0], flag[1]);
+            return new Flag(flag[0], flag[1]);
         }
 
         public override string ToString()

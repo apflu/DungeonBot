@@ -28,8 +28,8 @@ namespace Native.Csharp.App.Gameplay.Handler
                 sender.GetCurrentCharacter().AddBusyTime(new TimeSpan(0, MinutesGatherSingleHerb, 0));
 
             //设置正在采集的数量
-            sender.GetCurrentCharacter().SetFlag(new CharacterFlag("quantityJobGatheringHerb", quantity + ""));
-            sender.GetCurrentCharacter().SetFlag(new CharacterFlag("currentJob", "GatherHerb"));
+            sender.GetCurrentCharacter().SetFlag(new Flag("quantityJobGatheringHerb", quantity + ""));
+            sender.GetCurrentCharacter().SetFlag(new Flag("currentJob", "GatherHerb"));
         }
     }
 }

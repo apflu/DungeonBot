@@ -135,7 +135,7 @@
     <Compile Include="App\Exception\ActionType.cs" />
     <Compile Include="App\Exception\InvalidFlagException.cs" />
     <Compile Include="App\Exception\InvalidInputException.cs" />
-    <Compile Include="App\Gameplay\ActionSource.cs" />
+    <Compile Include="App\Gameplay\GameAction.cs" />
     <Compile Include="App\Gameplay\Character.cs" />
     <Compile Include="App\Gameplay\CharacterProperties.cs" />
     <Compile Include="App\Gameplay\Generator\ItemGenerator.cs" />
@@ -147,7 +147,7 @@
     <Compile Include="App\Gameplay\Item.cs" />
     <Compile Include="App\Gameplay\ItemStack.cs" />
     <Compile Include="App\Gameplay\Player.cs" />
-    <Compile Include="App\Gameplay\CharacterFlag.cs" />
+    <Compile Include="App\Gameplay\Flag.cs" />
     <Compile Include="App\Plugin.cs" />
     <Compile Include="App\UserInteract\Locale.cs" />
     <Compile Include="App\UserInteract\MessageSender.cs" />

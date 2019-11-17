@@ -19,5 +19,10 @@ namespace Native.Csharp.App.UserInteract
         {
             Common.CqApi.SendGroupMessage(634893702, message);
         }
+
+        public void Notify(long QQID, string message)
+        {
+            Common.CqApi.SendPrivateMessage(QQID, message);
+        }
     }
 }

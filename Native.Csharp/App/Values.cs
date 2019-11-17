@@ -16,9 +16,9 @@ namespace Native.Csharp.App
 
         public const string RegularDice = "^\\d+d\\d+$";
 
-        public readonly ActionSource SourceSelf;
-        public readonly ActionSource SourceEnvironment;
-        public readonly ActionSource SourceTime;
+        public readonly GameAction SourceSelf;
+        public readonly GameAction SourceEnvironment;
+        public readonly GameAction SourceTime;
 
         public Values()
         {
@@ -35,9 +35,9 @@ namespace Native.Csharp.App
                 new Dice(1, 100)
             };
 
-            SourceSelf = new ActionSource(ActionSource.TypeSelf);
-            SourceEnvironment = new ActionSource(ActionSource.TypeEnvironment);
-            SourceTime = new ActionSource(ActionSource.TypeTime);
+            SourceSelf = new GameAction(GameAction.TypeSelf);
+            SourceEnvironment = new GameAction(GameAction.TypeEnvironment);
+            SourceTime = new GameAction(GameAction.TypeTime);
         }
 
         public Dice GetDice(string target)

@@ -33,7 +33,7 @@ namespace Native.Csharp.App.Command
             }
             else 
             {
-                CharacterFlag existedJob = sender.GetCurrentCharacter().GetFlag("quantityJobGatheringHerb");
+                Flag existedJob = sender.GetCurrentCharacter().GetFlag("quantityJobGatheringHerb");
                 //如果有已完成的草药采集
                 if(existedJob != null)
                 {
@@ -45,7 +45,7 @@ namespace Native.Csharp.App.Command
                         sender.Inventory.AddItem(gatheredItem);
                         result += sender.GetName() + "上次采集到了" + ItemHandler.ConvertToString(gatheredItem) + "！\r\n";
 
-                        sender.GetCurrentCharacter().SetFlag(new CharacterFlag("quantityJobGatheringHerb", 0 + ""));
+                        sender.GetCurrentCharacter().SetFlag(new Flag("quantityJobGatheringHerb", 0 + ""));
                     }
                 }
 
