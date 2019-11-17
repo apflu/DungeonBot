@@ -27,8 +27,8 @@ namespace Native.Csharp.App.Gameplay
         public const string Char_FlagName_TypeCharacter = "CharType";
             public const string Char_FlagContent_TypeTemp = "Temp";
             public const string Char_FlagContent_TypePlayer = "Player";
-            public const string Char_FlagContent_TypeFriendly = "Friendly"; //NPC use only
-            public const string Char_FlagContent_TypeEnemy = "Enemy";
+            public const string Char_FlagContent_TypeNPCFriendly = "Friendly";
+            public const string Char_FlagContent_TypeNPCEnemy = "Enemy";
 
         /*
          * ===========================动作Flag===========================
