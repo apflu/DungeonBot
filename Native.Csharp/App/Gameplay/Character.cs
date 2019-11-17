@@ -20,13 +20,14 @@ namespace Native.Csharp.App.Gameplay
         public string IsCharacterFinished { get; protected set; }
         protected DateTime NextFreeTime { private get; set; }
 
-        public Character(string name)
+        public Character(string name, byte[] properties)
             :base()
         {
             NextFreeTime = DateTime.Now;
             Inventory = new Inventory();
             Name = name;
             Owner = Plugin.GetPlayerHandler().PlayerWorld;
+            Properties = new CharacterProperties(properties);
         }
 
         public Character SetOwner(Player owner)

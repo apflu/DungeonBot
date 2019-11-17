@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\Command\AbandonItemCommand.cs" />
+    <Compile Include="App\Command\ConfirmCharacterCommand.cs" />
     <Compile Include="App\Command\CreateCharacterCommand.cs" />
     <Compile Include="App\Command\DebugCommand.cs" />
     <Compile Include="App\Command\Tools\CommandHandler.cs" />
