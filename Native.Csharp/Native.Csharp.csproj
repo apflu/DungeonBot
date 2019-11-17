@@ -150,8 +150,11 @@
     <Compile Include="App\Plugin.cs" />
     <Compile Include="App\UserInteract\Locale.cs" />
     <Compile Include="App\UserInteract\MessageSender.cs" />
+    <Compile Include="App\Util\Dice.cs" />
+    <Compile Include="App\Util\DiceResult.cs" />
     <Compile Include="App\Util\Possibility.cs" />
     <Compile Include="App\Util\RandomTable.cs" />
+    <Compile Include="App\Util\Values.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repair\Core\Kernel32.cs" />
     <Compile Include="Repair\Enum\LoadLibraryFlags.cs" />
