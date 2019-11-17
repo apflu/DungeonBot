@@ -24,13 +24,13 @@ namespace Native.Csharp.App.Gameplay.Handler
         
         public Character[] GetCharacters(Player player)
         {
-            ArrayList result = new ArrayList();
+            List<Character> result = new List<Character>();
 
             foreach (Character character in Characters)
                 if (character.Owner == player)
                     result.Add(character);
 
-            return (Character[])result.ToArray();
+            return result.ToArray();
         }
 
         /// <summary>
