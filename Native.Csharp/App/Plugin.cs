@@ -47,10 +47,7 @@ namespace Native.Csharp.App
         }
 
         //PlayerHandler
-        public static PlayerHandler GetPlayerHandler()
-        {
-            return playerHandler;
-        }
+        public static PlayerHandler GetPlayerHandler() => playerHandler;
 
         public static bool SetPlayerHandler(PlayerHandler handler)
         {
@@ -63,10 +60,7 @@ namespace Native.Csharp.App
         }
 
         //CommandHandler
-        public static CommandHandler GetCommandHandler()
-        {
-            return commandHandler;
-        }
+        public static CommandHandler GetCommandHandler() => commandHandler;
 
         public static bool SetCommandHandler(CommandHandler handler)
         {
@@ -80,10 +74,7 @@ namespace Native.Csharp.App
 
 
         //ItemHandler
-        public static ItemHandler GetItemHandler()
-        {
-            return itemHandler;
-        }
+        public static ItemHandler GetItemHandler() => itemHandler;
 
         public static bool SetItemHandler(ItemHandler handler)
         {
@@ -96,10 +87,7 @@ namespace Native.Csharp.App
         }
 
         //HerbHandler
-        public static HerbHandler GetHerbHandler()
-        {
-            return herbHandler;
-        }
+        public static HerbHandler GetHerbHandler() => herbHandler;
 
         public static bool SetHerbHandler(HerbHandler handler)
         {
@@ -112,10 +100,7 @@ namespace Native.Csharp.App
         }
 
         //CharacterHandler
-        public static CharacterHandler GetCharacterHandler()
-        {
-            return characterHandler;
-        }
+        public static CharacterHandler GetCharacterHandler() => characterHandler;
 
         public static bool SetCharacterHandler(CharacterHandler handler)
         {
