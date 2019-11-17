@@ -139,6 +139,7 @@
     <Compile Include="App\Gameplay\GameAction.cs" />
     <Compile Include="App\Gameplay\Character.cs" />
     <Compile Include="App\Gameplay\CharacterProperties.cs" />
+    <Compile Include="App\Gameplay\Generator\AbilityScoreGenerator.cs" />
     <Compile Include="App\Gameplay\Generator\ItemGenerator.cs" />
     <Compile Include="App\Gameplay\Handler\CharacterHandler.cs" />
     <Compile Include="App\Gameplay\Handler\HerbHandler.cs" />
