@@ -12,19 +12,19 @@ namespace Native.Csharp.App.Gameplay
         public string Content { get; set; }
 
         //flag名
-        public const string FlagJobCurrent = "JobCurrent";
-        public const string FlagJobHerbAmount = "JobHerbAmount";
+        public const string Char_FlagName_JobCurrent = "JobCurrent";
+        public const string Char_FlagName_JobHerb_Amount = "JobHerbAmount";
 
-        public const string FlagTypeCharacter = "TypeCharacter";
+        public const string Char_FlagName_TypeCharacter = "TypeCharacter";
 
         //flag内容
-        public const string JobNone = "None";
-        public const string JobGatherHerb = "GatherHerb";
+        public const string Char_FlagContent_JobNone = "None";
+        public const string Char_FlagContent_JobHerb = "GatherHerb";
 
-        public const string TypeTemp = "Temp";
-        public const string TypePlayer = "Player";
-        public const string TypeFriendly = "Friendly"; //NPC use only
-        //public const string TypeEnemy = "Enemy";
+        public const string Char_FlagContent_TypeTemp = "Temp";
+        public const string Char_FlagContent_TypePlayer = "Player";
+        public const string Char_FlagContent_TypeFriendly = "Friendly"; //NPC use only
+        public const string Char_FlagContent_TypeEnemy = "Enemy";
 
 
         /// <summary>

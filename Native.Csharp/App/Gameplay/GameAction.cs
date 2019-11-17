@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,8 @@ namespace Native.Csharp.App.Gameplay
         public const string TypeCharacter = "Character";
 
         public Character SourceCharacter;
+
+        public ArrayList Flags { get; private set; }
 
         public GameAction(string type)
         {

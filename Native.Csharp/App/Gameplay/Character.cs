@@ -108,7 +108,7 @@ namespace Native.Csharp.App.Gameplay
 
         public bool IsDoingJob()
         {
-            return GetFlag(Flag.FlagJobCurrent).Content != Flag.JobNone;
+            return GetFlag(Flag.Char_FlagName_JobCurrent).Content != Flag.Char_FlagContent_JobNone;
         }
 
         /// <summary>
@@ -119,13 +119,13 @@ namespace Native.Csharp.App.Gameplay
         /// <param name="period"></param>
         public void SetJob(string job, TimeSpan period)
         {
-            SetFlag(new Flag(Flag.FlagJobCurrent, job));
+            SetFlag(new Flag(Flag.Char_FlagName_JobCurrent, job));
             AddBusyTime(period);
         }
 
         public void ClearJob()
         {
-            SetFlag(new Flag(Flag.FlagJobCurrent, Flag.JobNone));
+            SetFlag(new Flag(Flag.Char_FlagName_JobCurrent, Flag.Char_FlagContent_JobNone));
             NextFreeTime = DateTime.Now;
         }
 
