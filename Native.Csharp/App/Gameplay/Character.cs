@@ -188,6 +188,19 @@ namespace Native.Csharp.App.Gameplay
             return false;
         }
 
+        /*
+         * ===========================属性===========================
+         * =                                                        =
+         * =            这里列出了玩家的属性相关方法。              =
+         * =                                                        =
+         * ==========================================================
+         */
+
+        public void AddHP(int amount, ActionSource source, bool isExceedHPTempHP = false)
+        {
+
+        }
+
         //TODO: 重写Equals(object)方法
     }
 }

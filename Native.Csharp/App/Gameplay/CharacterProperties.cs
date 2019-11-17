@@ -1,5 +1,4 @@
-﻿using Native.Csharp.App.Gameplay.Spell;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,10 +8,15 @@ namespace Native.Csharp.App.Gameplay
 {
     public class CharacterProperties
     {
-        public byte STR, DEX, CON, INT, WIS, CHA;
+        public byte STR { get; internal set; }
+        public byte DEX { get; internal set; }
+        public byte CON { get; internal set; }
+        public byte INT { get; internal set; }
+        public byte WIS { get; internal set; }
+        public byte CHA { get; internal set; }
 
-        public byte HPCurrent;
-        public byte HPMax;
+        public byte HPCurrent { get; internal set; }
+        public byte HPMax { get; internal set; }
 
         /// <summary>
         /// 某些情况下（例如不死生物和构造体）不存在某项属性，
@@ -58,11 +62,6 @@ namespace Native.Csharp.App.Gameplay
                 (HPMax > 0) &&
                 (HPCurrent > 0)
                 );
-        }
-
-        public void AddHP(int amount, bool isExceedHPTempHP = false)
-        {
-
         }
     }
 }

@@ -44,15 +44,24 @@ namespace Native.Csharp.App
         {
             MatchCollection matches = Regex.Matches(target, RegularDice);
 
-            if(matches.Count > 0)
-            foreach (Dice dice in dices)
-                if (target == dice.ToString())
-                    return dice;
+            if (matches.Count > 0)
+            {
+                foreach (Dice dice in dices)
+                    if (target == dice.ToString())
+                        return dice;
+                return ParseDice(matches[0].Value);
+            }
+            return null;
         }
 
         private Dice ParseDice(string dice)
         {
+            MatchCollection matches = Regex.Matches(dice, "\\d+");
+            Dice result = new Dice(byte.Parse(matches[0].Value), byte.Parse(matches[1].Value));
 
+            if (result.IsValid())
+                return result;
+            return null;
         }
     }
 }

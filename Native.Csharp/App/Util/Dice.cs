@@ -11,6 +11,9 @@ namespace Native.Csharp.App.Util
         public byte Quantity { get; set; }
         public byte Size { get; protected set; }
 
+        public const byte MaxQuantity = 10;
+        public const byte MaxSize = 100;
+
         private readonly Random random;
         public Dice(byte quantity, byte size)
         {
@@ -32,6 +35,16 @@ namespace Native.Csharp.App.Util
                 intResult += result;
             }
             return new DiceResult(strResult.TrimEnd('+'), intResult);
+        }
+
+        public bool IsValid()
+        {
+            return (
+                (Quantity < MaxQuantity) && 
+                (Size < MaxSize) &&
+                (Quantity > 0) &&
+                (Size > 0)
+                );
         }
 
         public override string ToString()
