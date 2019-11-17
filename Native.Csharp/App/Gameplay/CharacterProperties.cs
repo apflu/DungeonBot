@@ -39,6 +39,9 @@ namespace Native.Csharp.App.Gameplay
             this.CHA = CHA;
         }
 
+        public CharacterProperties(byte[] AbilityScores)
+            : this(AbilityScores[0], AbilityScores[1], AbilityScores[2], AbilityScores[3], AbilityScores[4], AbilityScores[5]) {}
+
         public CharacterProperties(byte STR, byte DEX, byte CON, byte INT, byte WIS, byte CHA, byte maxHP)
             :this(STR, DEX, CON, INT, WIS, CHA)
         {
