@@ -15,6 +15,7 @@ namespace Native.Csharp.App.Command
             if(IsInputValid(sender, args))
             {
                 sender.SetCurrentCharacter(character);
+                sender.Reply("已指定当前角色为" + character.Name);
             }
         }
 
