@@ -132,9 +132,9 @@
     <Compile Include="App\Event\Event_CqExit.cs" />
     <Compile Include="App\Event\Event_CqStartup.cs" />
     <Compile Include="App\Event\Event_GroupMessage.cs" />
-    <Compile Include="App\Exception\ActionType.cs" />
-    <Compile Include="App\Exception\InvalidFlagException.cs" />
-    <Compile Include="App\Exception\InvalidInputException.cs" />
+    <Compile Include="App\CustomExceptions\ActionType.cs" />
+    <Compile Include="App\CustomExceptions\InvalidFlagException.cs" />
+    <Compile Include="App\CustomExceptions\InvalidInputException.cs" />
     <Compile Include="App\Gameplay\Flagable.cs" />
     <Compile Include="App\Gameplay\GameAction.cs" />
     <Compile Include="App\Gameplay\Character.cs" />

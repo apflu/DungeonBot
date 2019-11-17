@@ -23,6 +23,7 @@ namespace Native.Csharp.App.Gameplay
         public Character(string name)
             :base()
         {
+            NextFreeTime = DateTime.Now;
             Inventory = new Inventory();
             Name = name;
             Owner = Plugin.GetPlayerHandler().PlayerWorld;

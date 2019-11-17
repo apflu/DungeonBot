@@ -13,7 +13,10 @@ namespace Native.Csharp.App.Gameplay.Generator
 
         public AbilityScoreGenerator()
         {
-            Modifiers = new byte[5];
+            Modifiers = new byte[6]
+            {
+                0, 0, 0, 0, 0, 0
+            };
         }
 
         public byte[] Generate()

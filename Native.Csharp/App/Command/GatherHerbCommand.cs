@@ -19,46 +19,51 @@ namespace Native.Csharp.App.Command
 
             string result = "";
 
-            //判断是否忙碌
-            if(sender.GetCurrentCharacter().IsCurrentBusy())
+            if(sender.GetCurrentCharacter() != null)
             {
-
-                TimeSpan timeLeft = sender.GetCurrentCharacter().GetBusyTimeLeft();
-
-                if (timeLeft.Hours == 0)
-                    result += "你当前正忙！剩余时间：" + timeLeft.Minutes + "分钟" + timeLeft.Seconds + "秒\r\n";
-                else
-                    result += "你当前正忙！剩余时间：" + timeLeft.Hours + "小时" + timeLeft.Minutes + "分钟" + timeLeft.Seconds + "秒\r\n";
-
-            }
-            else 
-            {
-                Flag existedJob = sender.GetCurrentCharacter().GetFlag("quantityJobGatheringHerb");
-                //如果有已完成的草药采集
-                if(existedJob != null)
+                //判断是否忙碌
+                if (sender.GetCurrentCharacter().IsCurrentBusy())
                 {
-                    if(int.Parse(existedJob.Content) != 0)
+
+                    TimeSpan timeLeft = sender.GetCurrentCharacter().GetBusyTimeLeft();
+
+                    if (timeLeft.Hours == 0)
+                        result += "你当前正忙！剩余时间：" + timeLeft.Minutes + "分钟" + timeLeft.Seconds + "秒\r\n";
+                    else
+                        result += "你当前正忙！剩余时间：" + timeLeft.Hours + "小时" + timeLeft.Minutes + "分钟" + timeLeft.Seconds + "秒\r\n";
+
+                }
+                else
+                {
+                    Flag existedJob = sender.GetCurrentCharacter().GetFlag("quantityJobGatheringHerb");
+                    //如果有已完成的草药采集
+                    if (existedJob != null)
                     {
-                        //TODO: 创建JobHandler
-                        Item[] gatheredItem = Plugin.GetHerbHandler().GetHerb(sender, int.Parse(existedJob.Content));
+                        if (int.Parse(existedJob.Content) != 0)
+                        {
+                            //TODO: 创建JobHandler
+                            Item[] gatheredItem = Plugin.GetHerbHandler().GetHerb(sender, int.Parse(existedJob.Content));
 
-                        sender.Inventory.AddItem(gatheredItem);
-                        result += sender.GetName() + "上次采集到了" + ItemHandler.ConvertToString(gatheredItem) + "！\r\n";
+                            sender.Inventory.AddItem(gatheredItem);
+                            result += sender.GetName() + "上次采集到了" + ItemHandler.ConvertToString(gatheredItem) + "！\r\n";
 
-                        sender.GetCurrentCharacter().SetFlag(new Flag("quantityJobGatheringHerb", 0 + ""));
+                            sender.GetCurrentCharacter().SetFlag(new Flag("quantityJobGatheringHerb", 0 + ""));
+                        }
+                    }
+
+                    int quantity = ParseInput(sender, args);
+                    //执行命令
+                    if (quantity > 0)
+                    {
+                        result += "正在进行新的采集工作：采集" + quantity + "个草药…\r\n";
+                        Plugin.GetHerbHandler().GatherHerb(sender, quantity);
                     }
                 }
-
-                int quantity = ParseInput(sender, args);
-                //执行命令
-                if(quantity > 0)
-                {
-                    result += "正在进行新的采集工作：采集" + quantity + "个草药…\r\n";
-                    Plugin.GetHerbHandler().GatherHerb(sender, quantity);
-                }
+                messageSender.Send(sender.LastGroupID, result.TrimEnd('\r', '\n'));
             }
-            messageSender.Send(sender.LastGroupID, result.TrimEnd('\r', '\n'));
+            messageSender.Send(sender.LastGroupID, "你当前没有角色！");
         }
+            
 
 
         /// <summary>
