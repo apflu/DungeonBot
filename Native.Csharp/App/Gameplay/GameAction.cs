@@ -9,27 +9,13 @@ namespace Native.Csharp.App.Gameplay
 {
     public class GameAction : Flagable, IFlagable
     {
-        public string Type { get; protected set; }
-
-        public const string TypeSelf = "Self";
-        public const string TypeEnvironment = "Environment";
-        public const string TypeTime = "Time";
-
-        public const string TypeCharacter = "Character";
-
         public Character SourceCharacter;
 
-        public ArrayList Flags { get; private set; }
+        public DateTime Time { get; protected internal set; }
 
-        public GameAction(string type)
+        public GameAction()
         {
-            Type = type;
-        }
-
-        public GameAction(Character character)
-        {
-            Type = TypeCharacter;
-            SourceCharacter = character;
+            Time = DateTime.Now;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Native.Csharp.App.Gameplay
 
         public byte HPCurrent { get; internal set; }
         public byte HPMax { get; internal set; }
+        public int HPTemp { get; internal set; }
 
         /// <summary>
         /// 某些情况下（例如不死生物和构造体）不存在某项属性，

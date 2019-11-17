@@ -18,21 +18,17 @@ namespace Native.Csharp.App.Gameplay
          * =                                                            =
          * ==============================================================
          */
-
-        //flag名
+        
         public const string Char_FlagName_JobCurrent = "JobCurrent";
-        public const string Char_FlagName_JobHerb_Amount = "JobHerbAmount";
+            public const string Char_FlagContent_JobNone = "None";
+            public const string Char_FlagContent_JobHerb = "GatherHerb";
+                public const string Char_FlagName_JobHerb_Amount = "JobHerbAmount";
 
-        public const string Char_FlagName_TypeCharacter = "TypeCharacter";
-
-        //flag内容
-        public const string Char_FlagContent_JobNone = "None";
-        public const string Char_FlagContent_JobHerb = "GatherHerb";
-
-        public const string Char_FlagContent_TypeTemp = "Temp";
-        public const string Char_FlagContent_TypePlayer = "Player";
-        public const string Char_FlagContent_TypeFriendly = "Friendly"; //NPC use only
-        public const string Char_FlagContent_TypeEnemy = "Enemy";
+        public const string Char_FlagName_TypeCharacter = "CharType";
+            public const string Char_FlagContent_TypeTemp = "Temp";
+            public const string Char_FlagContent_TypePlayer = "Player";
+            public const string Char_FlagContent_TypeFriendly = "Friendly"; //NPC use only
+            public const string Char_FlagContent_TypeEnemy = "Enemy";
 
         /*
          * ===========================动作Flag===========================
@@ -42,17 +38,25 @@ namespace Native.Csharp.App.Gameplay
          * ==============================================================
          */
 
-        //flag名
-        public const string Action_FlagName_Type = "Type";
-        public const string Action_FlagName_ActionSource = "Source";
+        public const string Action_FlagName_TypeSender = "TypeSender";
+            public const string Action_FlagName_Sender = "Sender";
 
-        //flag内容
-        public const string Action_FlagContent_TypeHeal = "Heal";
-        public const string Action_FlagContent_TypeAttack = "Attack";
+        public const string Action_FlagName_TypeObject = "TypeObject";
+            public const string Action_FlagName_Object = "Object";
 
-        public const string Action_FlagContent_SourceSelf = "Self";
-        public const string Action_FlagContent_SourceNature = "Nature";
-        public const string Action_FlagContent_SourceCharacter = "Character";
+        //public const string Action_FlagName_ActionSource = "Source";
+            public const string Action_FlagContent_SourceSelf = "Self";
+            public const string Action_FlagContent_SourceNature = "Nature";
+            public const string Action_FlagContent_SourceCharacter = "Character";
+            public const string Action_FlagContent_SourceTime = "time";
+
+
+        public const string Action_FlagName_ActionType = "Action";
+            public const string Action_FlagContent_TypeHeal = "Heal";
+                public const string Action_FlagName_TypeHeal_Overheal = "Overheal";
+            public const string Action_FlagContent_TypeAttack = "Attack";
+
+        
 
 
 

@@ -133,9 +133,30 @@ namespace Native.Csharp.App.Gameplay
          * ==========================================================
          */
 
-        public void AddHP(int amount, GameAction source, bool isExceedHPTempHP = false)
+        public GameAction AddHP(int amount, Flag flagSource, bool isExceedHPTempHP = false)
         {
+            GameAction result = new GameAction();
+            result.SetFlag(
+                Plugin.Values.Flag_ActionHeal, //是一个治疗动作
+                flagSource, //来源于…
+                new Flag(Flag.Action_FlagName_Object, GetFlag(Flag.Char_FlagName_TypeCharacter).Content), //目标是（我自己）
+                new Flag(Flag.Action_FlagName_Object, Name) //我自己又是谁
+                );
 
+            Properties.HPCurrent += (byte) amount;
+            if(Properties.HPCurrent > Properties.HPMax)
+            {
+                byte exceededHeal = (byte) (Properties.HPCurrent - Properties.HPMax);
+
+                Properties.HPCurrent = Properties.HPMax;
+
+                if (isExceedHPTempHP)
+                {
+                    Properties.HPTemp += exceededHeal;
+                    result.SetFlag(new Flag(Flag.Action_FlagName_TypeHeal_Overheal, exceededHeal + ""));
+                }
+            }
+            return result;
         }
 
         //TODO: 重写Equals(object)方法
