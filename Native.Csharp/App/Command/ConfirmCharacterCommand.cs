@@ -24,7 +24,12 @@ namespace Native.Csharp.App.Command
 
         private bool IsInputValid(Player sender, string[] args)
         {
-            if(args.Length < 2)
+            if (Plugin.GetCharacterHandler().GetCharacters(sender).Length == sender.MaxCharactersAllowed)
+            {
+                sender.Reply("你已达到最大角色数量上限！");
+                return false;
+            }
+            if (args.Length < 2)
             {
                 sender.Reply("你需要为你的角色指定名字！");
                 return false;
