@@ -48,6 +48,12 @@ namespace Native.Csharp.App.Event
 
                 else if (CommandAndArgs[0].Equals("*丢弃物品"))
                     new AbandonItemCommand().Execute(playerSender, CommandAndArgs);
+
+                else if (CommandAndArgs[0].Equals("*创建角色"))
+                    new CreateCharacterCommand().Execute(playerSender, CommandAndArgs);
+
+                else if (CommandAndArgs[0].Equals("*招募角色"))
+                    new ConfirmCharacterCommand().Execute(playerSender, CommandAndArgs);
             }
         }
     }
