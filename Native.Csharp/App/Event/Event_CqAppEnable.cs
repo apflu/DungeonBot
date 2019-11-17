@@ -37,6 +37,8 @@ namespace Native.Csharp.App.Event
             Plugin.SetItemHandler(new Gameplay.Handler.ItemHandler());
             Plugin.SetHerbHandler(new Gameplay.Handler.HerbHandler());
             Plugin.SetCharacterHandler(new Gameplay.Handler.CharacterHandler());
+
+            Plugin.GetMessageSender().DebugSend("Dungeon Bot启动完成！");
         }
 
         private void InitValues()
