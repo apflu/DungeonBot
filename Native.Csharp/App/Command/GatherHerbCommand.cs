@@ -62,7 +62,7 @@ namespace Native.Csharp.App.Command
                 messageSender.Send(sender.LastGroupID, result.TrimEnd('\r', '\n'));
             }
             else
-                messageSender.Send(sender.LastGroupID, "你当前没有角色！");
+                messageSender.Send(sender.LastGroupID, "你当前没有角色！\r\n" + "使用 *创建角色 来创建一个！");
         }
             
 

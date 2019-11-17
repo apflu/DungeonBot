@@ -13,10 +13,17 @@ namespace Native.Csharp.App.Command
         {
             string result = "";
 
-            result += sender.GetName() + "的物品栏中目前有：";
-            result += sender.Inventory.ToString();
+            if (sender.GetCurrentCharacter() != null)
+            {
+                result += sender.GetCurrentCharacter().Name + "的物品栏中目前有：";
+                result += sender.GetCurrentCharacter().Inventory.ToString();
 
-            Plugin.GetMessageSender().Send(sender.LastGroupID, result);
+                Plugin.GetMessageSender().Send(sender.LastGroupID, result);
+            }
+            else
+                sender.Reply("你当前没有角色！\r\n" + "使用 *创建角色 来创建一个！");
+
+            
         }
     }
 }

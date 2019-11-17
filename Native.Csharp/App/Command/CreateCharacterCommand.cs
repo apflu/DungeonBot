@@ -22,7 +22,8 @@ namespace Native.Csharp.App.Command
                 sender.Reply(
                     "你找到了一名新的冒险者！\r\n" +
                     "属性为 力量" + scores[0] + " 敏捷" + scores[1] + " 体质" + scores[2] +
-                    " 智力" + scores[3] + " 感知" + scores[4] + " 魅力" + scores[5]
+                    " 智力" + scores[3] + " 感知" + scores[4] + " 魅力" + scores[5] +"\r\n" +
+                    "使用*招募角色 <角色名> 来确认你的选择！"
                     );
 
                 sender.PendingCharacter = scores;
