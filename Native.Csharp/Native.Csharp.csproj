@@ -106,6 +106,7 @@
     <Compile Include="App\Command\ConfirmCharacterCommand.cs" />
     <Compile Include="App\Command\CreateCharacterCommand.cs" />
     <Compile Include="App\Command\DebugCommand.cs" />
+    <Compile Include="App\Command\SetCurrentCharacterCommand.cs" />
     <Compile Include="App\Command\Tools\CommandHandler.cs" />
     <Compile Include="App\Command\GatherHerbCommand.cs" />
     <Compile Include="App\Command\Tools\ICommand.cs" />

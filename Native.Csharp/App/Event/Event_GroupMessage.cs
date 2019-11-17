@@ -54,6 +54,9 @@ namespace Native.Csharp.App.Event
 
                 else if (CommandAndArgs[0].Equals("*招募角色"))
                     new ConfirmCharacterCommand().Execute(playerSender, CommandAndArgs);
+
+                else if (CommandAndArgs[0].Equals("*指定当前角色"))
+                    new SetCurrentCharacterCommand().Execute(playerSender, CommandAndArgs);
             }
         }
     }
