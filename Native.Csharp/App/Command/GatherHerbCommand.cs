@@ -27,12 +27,7 @@ namespace Native.Csharp.App.Command
                 if (character.IsCurrentBusy())
                 {
 
-                    TimeSpan timeLeft = character.GetBusyTimeLeft();
-
-                    if (timeLeft.Hours == 0)
-                        result += character.Name + "当前正忙！剩余时间：" + timeLeft.Minutes + "分钟" + timeLeft.Seconds + "秒\r\n";
-                    else
-                        result += character.Name + "当前正忙！剩余时间：" + timeLeft.Hours + "小时" + timeLeft.Minutes + "分钟" + timeLeft.Seconds + "秒\r\n";
+                    sender.Reply(character.GetBusyTimeLeft(true));
 
                 }
                 else

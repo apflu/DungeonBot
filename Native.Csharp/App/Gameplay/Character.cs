@@ -85,6 +85,21 @@ namespace Native.Csharp.App.Gameplay
             NextFreeTime.Subtract(timeSpan);
         }
 
+        public string GetBusyTimeLeft(bool _)
+        {
+            TimeSpan timeLeft = GetBusyTimeLeft();
+            string result = "当前正忙！剩余时间：";
+            if (timeLeft.Days != 0)
+                result += timeLeft.Days + "天";
+            if (timeLeft.Hours != 0)
+                result += timeLeft.Hours + "小时";
+            if (timeLeft.Minutes != 0)
+                result += timeLeft.Minutes + "分钟";
+            if (timeLeft.Seconds != 0)
+                result += timeLeft.Seconds + "秒";
+            return result;
+        }
+
         /*
          * ===========================工作===========================
          * =                                                        =
