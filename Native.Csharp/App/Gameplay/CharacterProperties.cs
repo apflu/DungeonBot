@@ -48,6 +48,26 @@ namespace Native.Csharp.App.Gameplay
             HPMax = maxHP;
         }
 
+        public static string GetTributeName(int i)
+        {
+            switch(i)
+            {
+                case 0:
+                    return "力量";
+                case 1:
+                    return "敏捷";
+                case 2:
+                    return "体质";
+                case 3:
+                    return "智力";
+                case 4:
+                    return "感知";
+                case 5:
+                    return "魅力";
+            }
+            return null;
+        }
+
         /// <summary>
         /// 检查角色是否已经能够被使用（以及能够行动）
         /// 伊利丹梗

@@ -1,4 +1,5 @@
-﻿using Native.Csharp.App.Gameplay.Handler;
+﻿using Native.Csharp.App.Gameplay.Generator;
+using Native.Csharp.App.Gameplay.Handler;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,9 +16,10 @@ namespace Native.Csharp.App.Gameplay
         public long QQID { get; private set; }
         public long LastGroupID { get; set; }
         public Inventory Inventory { get; protected set; }
-        public byte MaxCharactersAllowed { get; set; }
+        public byte MaxCharAllowed { get; set; }
 
-        public byte[] PendingCharacter;
+        public AbilityScoreGenerator[] PendingCharacter;
+        public int MaxCharacterUponGeneration;
 
         private Character CurrentCharacter;
         
@@ -33,7 +35,7 @@ namespace Native.Csharp.App.Gameplay
         {
             QQID = qqID;
             Inventory = new Inventory();
-            MaxCharactersAllowed = PlayerHandler.DefaultMaxCharactersAllowed;
+            MaxCharAllowed = PlayerHandler.DefaultMaxCharactersAllowed;
 
             Flags = new ArrayList();
         }

@@ -17,7 +17,7 @@ namespace Native.Csharp.App.Command
                 {
                     case "AbilityScoreGenerator":
                         string result = "";
-                        foreach (byte score in new AbilityScoreGenerator().Generate())
+                        foreach (byte score in new AbilityScoreGenerator().GetResult())
                             result += score + " ";
                         Plugin.GetMessageSender().DebugSend(result);
                         break;

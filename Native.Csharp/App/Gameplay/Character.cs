@@ -88,7 +88,7 @@ namespace Native.Csharp.App.Gameplay
         public string GetBusyTimeLeft(bool _)
         {
             TimeSpan timeLeft = GetBusyTimeLeft();
-            string result = "当前正忙！剩余时间：";
+            string result = Name + "当前正忙！剩余时间：";
             if (timeLeft.Days != 0)
                 result += timeLeft.Days + "天";
             if (timeLeft.Hours != 0)

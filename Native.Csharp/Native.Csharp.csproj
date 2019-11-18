@@ -112,6 +112,7 @@
     <Compile Include="App\Command\GatherHerbCommand.cs" />
     <Compile Include="App\Command\Tools\ICommand.cs" />
     <Compile Include="App\Command\ShowInventoryCommand.cs" />
+    <Compile Include="App\Command\TransferItemCommand.cs" />
     <Compile Include="App\Common.cs" />
     <Compile Include="App\Core\LibExport.cs">
       <AutoGen>True</AutoGen>
