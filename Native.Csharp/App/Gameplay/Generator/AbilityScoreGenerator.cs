@@ -94,8 +94,7 @@ namespace Native.Csharp.App.Gameplay.Generator
             {
                 result += GetTribute(i);
             }
+            return result;
         }
-
-
     }
 }
