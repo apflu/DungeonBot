@@ -35,7 +35,7 @@ namespace Native.Csharp.App.Command
                             //TODO: 创建JobHandler
                             Item[] gatheredItem = Plugin.GetHerbHandler().GetHerb(sender, int.Parse(existedJob.Content));
 
-                            sender.Inventory.AddItem(gatheredItem);
+                            sender.GetCurrentCharacter().Inventory.AddItem(gatheredItem);
                             result += character.Name + "上次采集到了" + ItemHandler.ConvertToString(gatheredItem) + "！\r\n";
 
                             character.SetFlag(new Flag("quantityJobGatheringHerb", 0 + ""));
