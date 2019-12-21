@@ -8,13 +8,13 @@ namespace Native.Csharp.App.Gameplay
 {
     public class Flag
     {
-        public string Name { get; private set; }
-        public string Content { get; set; }
+        public string Key { get; private set; }
+        public string Value { get; set; }
 
         /*
          * ===========================角色Flag===========================
          * =                                                            =
-         * =            这里列出了玩家的角色相关Flag。                  =
+         * =               这里列出了角色相关Flag。                     =
          * =                                                            =
          * ==============================================================
          */
@@ -33,7 +33,7 @@ namespace Native.Csharp.App.Gameplay
         /*
          * ===========================动作Flag===========================
          * =                                                            =
-         * =            这里列出了玩家的动作相关Flag。                  =
+         * =            这里列出了角色的动作相关Flag。                  =
          * =                                                            =
          * ==============================================================
          */
@@ -52,23 +52,33 @@ namespace Native.Csharp.App.Gameplay
 
 
         public const string Action_FlagName_ActionType = "Action";
+            public const string Action_FlagContent_TypeDamaged = "Damaged";
             public const string Action_FlagContent_TypeHeal = "Heal";
                 public const string Action_FlagName_TypeHeal_Overheal = "Overheal";
+                public const string Action_FlagName_ExceedHealToTempHP = "ExceedHealToTempHP";
             public const string Action_FlagContent_TypeAttack = "Attack";
 
-        
+        /*
+         * ===========================状态Flag===========================
+         * =                                                            =
+         * =            这里列出了角色的状态相关Flag。                  =
+         * =                                                            =
+         * ==============================================================
+         */
+
+        public const string Status_FlagName_CanBenefitFromRest = "BenefitFromRest";
 
 
 
         /// <summary>
         /// 构造方法：不能包括空格或分号
         /// </summary>
-        /// <param name="name">名字；不能包括空格或分号</param>
-        /// <param name="content">内容；不能包括空格或分号</param>
-        public Flag(string name, string content)
+        /// <param name="key">名字；不能包括空格或分号</param>
+        /// <param name="value">内容；不能包括空格或分号</param>
+        public Flag(string key, string value)
         {
-            Name = name;
-            Content = content;
+            Key = key;
+            Value = value;
         }
 
         public Flag Parse(string strFlag)
@@ -78,9 +88,14 @@ namespace Native.Csharp.App.Gameplay
             return new Flag(flag[0], flag[1]);
         }
 
+        public KeyValuePair<string, string> ToKeyValuePair()
+        {
+            return new KeyValuePair<string, string>(Key, Value);
+        }
+
         public override string ToString()
         {
-            return Name + " " + Content + ";";
+            return Key + " " + Value + ";";
         }
     }
 }

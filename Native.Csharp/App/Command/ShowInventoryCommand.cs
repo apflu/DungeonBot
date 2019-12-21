@@ -7,7 +7,7 @@ using Native.Csharp.App.Gameplay;
 
 namespace Native.Csharp.App.Command
 {
-    public class ShowPlayerInventoryCommand : ICommand
+    public class ShowInventoryCommand : ICommand
     {
         public void Execute(Player sender, params string[] args)
         {

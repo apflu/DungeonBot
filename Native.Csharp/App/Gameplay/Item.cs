@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Native.Csharp.App.Gameplay.Items.ItemTypes;
+using Native.Csharp.App.UserInteract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay
 {
-    public class Item
+    [Obsolete("请使用IItem接口代替。")]
+    public class Item : IItem
     {
-        public int ItemID { get; private set; }
-        public string ItemName { get; private set; }
+        public int ItemID { get; }
+        public LocaleKey ItemName { get; set; }
 
         public Item(int id)
         {
@@ -19,7 +22,7 @@ namespace Native.Csharp.App.Gameplay
         public Item(int id, string name)
         {
             ItemID = id;
-            ItemName = name;
+            ItemName = Plugin.GetLocaleManager().GetKey(name);
         }
 
         /// <summary>
@@ -27,7 +30,7 @@ namespace Native.Csharp.App.Gameplay
         /// </summary>
         /// <param name="item">需要比较的物品</param>
         /// <returns></returns>
-        public bool Equals(Item item)
+        public bool Equals(IItem item)
         {
             return (item.ItemID == ItemID);
         }

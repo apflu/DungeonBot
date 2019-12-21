@@ -32,11 +32,14 @@ namespace Native.Csharp.App.Event
         private void InitObjects()
         {
             Plugin.SetMessageSender(new UserInteract.MessageSender());
+            Plugin.SetLocaleManager(new UserInteract.LocaleManager());
+
             Plugin.SetPlayerHandler(new Gameplay.Handler.PlayerHandler());
             Plugin.SetCommandHandler(new Command.CommandHandler());
             Plugin.SetItemHandler(new Gameplay.Handler.ItemHandler());
             Plugin.SetHerbHandler(new Gameplay.Handler.HerbHandler());
             Plugin.SetCharacterHandler(new Gameplay.Handler.CharacterHandler());
+            //Plugin.SetEventContainer(new Events.EventContainer());
 
             Plugin.GetMessageSender().DebugSend("Dungeon Bot启动完成！");
         }
@@ -44,6 +47,9 @@ namespace Native.Csharp.App.Event
         private void InitValues()
         {
             Plugin.Values = new Values();
+
+            Plugin.GetLocaleManager().RegisterLocale(new UserInteract.LocaleDefault());
+            //Plugin.GetLocaleManager().RegisterLocale(new UserInteract.LocaleLila());
         }
     }
 }

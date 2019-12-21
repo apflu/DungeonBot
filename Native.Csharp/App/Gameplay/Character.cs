@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Native.Csharp.App.Gameplay.CharacterUtil;
+using Native.Csharp.App.Gameplay.Generator;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +18,28 @@ namespace Native.Csharp.App.Gameplay
         public string Name { get; protected set; }
         public Player Owner { get; protected set; }
         public CharacterProperties Properties { get; }
+        public CharacterModifiers Modifiers { get; }
 
         public string IsCharacterFinished { get; protected set; }
         protected DateTime NextFreeTime { private get; set; }
 
-        public Character(string name, byte[] properties)
-            :base()
+        public Character(string name, AbilityScoreGenerator properties)
+            : base()
         {
             NextFreeTime = DateTime.Now;
             Inventory = new Inventory();
             Name = name;
             Owner = Plugin.GetPlayerHandler().PlayerWorld;
-            Properties = new CharacterProperties(properties);
+            Properties = new CharacterProperties(properties)
+            {
+                Owner = this
+            };
+        }
+
+        public Character(string name, AbilityScoreGenerator properties, Player owner)
+            : this(name, properties)
+        {
+            SetOwner(owner);
         }
 
         public Character SetOwner(Player owner)
@@ -121,7 +133,7 @@ namespace Native.Csharp.App.Gameplay
 
         public bool IsDoingJob()
         {
-            return GetFlag(Flag.Char_FlagName_JobCurrent).Content != Flag.Char_FlagContent_JobNone;
+            return GetFlag(Flag.Char_FlagName_JobCurrent).Value != Flag.Char_FlagContent_JobNone;
         }
 
         /// <summary>
@@ -150,13 +162,13 @@ namespace Native.Csharp.App.Gameplay
          * ==========================================================
          */
 
-        public GameAction AddHP(int amount, Flag flagSource, bool isExceedHPTempHP = false)
+        public GameAction Heal(int amount, Flag flagSource, bool isExceedHPTempHP = false)
         {
             GameAction result = new GameAction();
             result.SetFlag(
                 Plugin.Values.Flag_ActionHeal, //是一个治疗动作
                 flagSource, //来源于…
-                new Flag(Flag.Action_FlagName_Object, GetFlag(Flag.Char_FlagName_TypeCharacter).Content), //目标是（我自己）
+                new Flag(Flag.Action_FlagName_Object, GetFlag(Flag.Char_FlagName_TypeCharacter).Value), //目标是（我自己）
                 new Flag(Flag.Action_FlagName_Object, Name) //我自己又是谁
                 );
 

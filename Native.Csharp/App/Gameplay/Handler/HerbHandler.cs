@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Native.Csharp.App.Gameplay.Items.ItemTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Native.Csharp.App.Gameplay.Handler
     {
         public const int MinutesGatherSingleHerb = 5;
         public const int MinutesGatherMultipleHerb = 6;
-        public Item[] GetHerb(Player _, int quantity)
+        public IItem[] GetHerb(Player _, int quantity)
         {
             return Plugin.GetItemHandler().DefaultItemGenerator.Generate(quantity);
         }

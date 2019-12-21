@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Native.Csharp.App.Gameplay.Items.ItemTypes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,20 @@ namespace Native.Csharp.App.Gameplay
 {
     public class Inventory
     {
-        public ArrayList Items;
+        public List<ItemStack> Items;
 
         public Inventory()
         {
-            Items = new ArrayList();
+            Items = new List<ItemStack>();
         }
 
         /// <summary>
         /// 添加1个物品到物品栏中
         /// </summary>
         /// <param name="item">欲要添加的物品</param>
-        public void AddItem(params Item[] items)
+        public void AddItem(params IItem[] items)
         {
-            foreach(Item item in items)
+            foreach(IItem item in items)
             {
                 ItemStack existedStack = SearchInventory(item);
 
@@ -51,7 +52,7 @@ namespace Native.Csharp.App.Gameplay
         /// 丢弃物品栏中所有指定物品
         /// </summary>
         /// <param name="item"></param>
-        public bool AbandonItems(Item item)
+        public bool AbandonItems(IItem item)
         {
             ItemStack stack = SearchInventory(item);
             if(stack != null)
@@ -84,7 +85,7 @@ namespace Native.Csharp.App.Gameplay
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        private ItemStack SearchInventory(Item item)
+        private ItemStack SearchInventory(IItem item)
         {
             foreach (ItemStack stack in Items)
                 if (stack.Item.Equals(item))

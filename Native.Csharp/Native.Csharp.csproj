@@ -18,7 +18,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>..\..\..\酷Q Air\dev\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
@@ -106,6 +106,7 @@
     <Compile Include="App\Command\ConfirmCharacterCommand.cs" />
     <Compile Include="App\Command\CreateCharacterCommand.cs" />
     <Compile Include="App\Command\DebugCommand.cs" />
+    <Compile Include="App\Command\PlayerChangeNameCommand.cs" />
     <Compile Include="App\Command\PlayerInfoCommand.cs" />
     <Compile Include="App\Command\SetCurrentCharacterCommand.cs" />
     <Compile Include="App\Command\Tools\CommandHandler.cs" />
@@ -130,6 +131,8 @@
       <DependentUpon>StatusExport.tt</DependentUpon>
     </Compile>
     <Compile Include="App\Data\SqlHandler.cs" />
+    <Compile Include="App\EventList.cs" />
+    <Compile Include="App\Events\EventContainer.cs" />
     <Compile Include="App\Event\EventProcessor.cs" />
     <Compile Include="App\Event\Event_AppMain.cs" />
     <Compile Include="App\Event\Event_CqAppDisable.cs" />
@@ -137,15 +140,60 @@
     <Compile Include="App\Event\Event_CqExit.cs" />
     <Compile Include="App\Event\Event_CqStartup.cs" />
     <Compile Include="App\Event\Event_GroupMessage.cs" />
-    <Compile Include="App\CustomExceptions\ActionType.cs" />
-    <Compile Include="App\CustomExceptions\InvalidFlagException.cs" />
-    <Compile Include="App\CustomExceptions\InvalidInputException.cs" />
+    <Compile Include="App\Exceptions\ActionType.cs" />
+    <Compile Include="App\Exceptions\InvalidFlagException.cs" />
+    <Compile Include="App\Exceptions\InvalidInputException.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\CharacterModifiers.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Classes\ArcaneCaster.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Classes\CharacterClass.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Classes\ClassCleric.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Classes\ClassFighter.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Classes\ClassMonk.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Classes\ClassRogue.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Classes\ClassWizard.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Classes\DivineCaster.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Classes\SpellCaster.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Feats\CombatFeat.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Feats\Feat.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\NPC.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\NPCs\Merchant.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Acrobatics.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Appraise.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Climb.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Craft.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Diplomacy.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\DisableDevice.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Escape.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Heal.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\ISkill.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Knowledge.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Perception.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Perform.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Profession.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Skill.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Spellcraft.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Survival.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\Swim.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\Skills\UseMagicDevice.cs" />
     <Compile Include="App\Gameplay\Flagable.cs" />
+    <Compile Include="App\Gameplay\Forces\Force.cs" />
+    <Compile Include="App\Gameplay\Forces\Prestige.cs" />
     <Compile Include="App\Gameplay\GameAction.cs" />
     <Compile Include="App\Gameplay\Character.cs" />
-    <Compile Include="App\Gameplay\CharacterProperties.cs" />
+    <Compile Include="App\Gameplay\CharacterUtil\CharacterProperties.cs" />
     <Compile Include="App\Gameplay\Generator\AbilityScoreGenerator.cs" />
     <Compile Include="App\Gameplay\Generator\ItemGenerator.cs" />
+    <Compile Include="App\Gameplay\Geography\MapUtil\Grid10.cs" />
+    <Compile Include="App\Gameplay\Geography\MapUtil\Grid5.cs" />
+    <Compile Include="App\Gameplay\Geography\MapUtil\GridMile.cs" />
+    <Compile Include="App\Gameplay\Geography\MapUtil\Maps\AreaMap.cs" />
+    <Compile Include="App\Gameplay\Geography\MapUtil\Maps\InDoorMap.cs" />
+    <Compile Include="App\Gameplay\Geography\MapUtil\Maps\LocalMap.cs" />
+    <Compile Include="App\Gameplay\Geography\MapUtil\Maps\LocationMap.cs" />
+    <Compile Include="App\Gameplay\Geography\MapUtil\Map.cs" />
+    <Compile Include="App\Gameplay\Geography\MapUtil\Maps\TacticalMap.cs" />
+    <Compile Include="App\Gameplay\Geography\MapUtil\Maps\TravelMap.cs" />
+    <Compile Include="App\Gameplay\Geography\MapUtil\Maps\WorldMap.cs" />
     <Compile Include="App\Gameplay\Handler\CharacterHandler.cs" />
     <Compile Include="App\Gameplay\Handler\HerbHandler.cs" />
     <Compile Include="App\Gameplay\Handler\ItemHandler.cs" />
@@ -154,10 +202,36 @@
     <Compile Include="App\Gameplay\Inventory.cs" />
     <Compile Include="App\Gameplay\Item.cs" />
     <Compile Include="App\Gameplay\ItemStack.cs" />
+    <Compile Include="App\Gameplay\Items\Foods\Berry.cs" />
+    <Compile Include="App\Gameplay\Items\Foods\Food.cs" />
+    <Compile Include="App\Gameplay\Items\ItemTypes\IFood.cs" />
+    <Compile Include="App\Gameplay\Items\Herbs\Catnip.cs" />
+    <Compile Include="App\Gameplay\Items\Herbs\DragonBreath.cs" />
+    <Compile Include="App\Gameplay\Items\Herbs\Herb.cs" />
+    <Compile Include="App\Gameplay\Items\Herbs\HoneyBerry.cs" />
+    <Compile Include="App\Gameplay\Items\ItemTypes\IHerb.cs" />
+    <Compile Include="App\Gameplay\Items\Herbs\SparkledFern.cs" />
+    <Compile Include="App\Gameplay\Items\Herbs\Weed.cs" />
+    <Compile Include="App\Gameplay\Items\ItemTypes\IEquipment.cs" />
+    <Compile Include="App\Gameplay\Items\ItemTypes\IItem.cs" />
+    <Compile Include="App\Gameplay\Items\ItemTypes\IItemConsumable.cs" />
+    <Compile Include="App\Gameplay\Items\ItemTypes\IItemDecayable.cs" />
+    <Compile Include="App\Gameplay\Items\ItemTypes\IItemMagical.cs" />
+    <Compile Include="App\Gameplay\Items\ItemTypes\IItemUseable.cs" />
+    <Compile Include="App\Gameplay\Modifiers\Fatigued.cs" />
+    <Compile Include="App\Gameplay\Modifiers\Hungry.cs" />
+    <Compile Include="App\Gameplay\Modifiers\ModifierTypes\IBuff.cs" />
+    <Compile Include="App\Gameplay\Modifiers\ModifierTypes\IDebuff.cs" />
+    <Compile Include="App\Gameplay\Modifiers\ModifierTypes\IModifier.cs" />
+    <Compile Include="App\Gameplay\Modifiers\ModifierTypes\IModifierExpirable.cs" />
     <Compile Include="App\Gameplay\Player.cs" />
     <Compile Include="App\Gameplay\Flag.cs" />
     <Compile Include="App\Plugin.cs" />
     <Compile Include="App\UserInteract\Locale.cs" />
+    <Compile Include="App\UserInteract\LocaleDefault.cs" />
+    <Compile Include="App\UserInteract\LocaleKey.cs" />
+    <Compile Include="App\UserInteract\LocaleLila.cs" />
+    <Compile Include="App\UserInteract\LocaleManager.cs" />
     <Compile Include="App\UserInteract\MessageSender.cs" />
     <Compile Include="App\Util\Dice.cs" />
     <Compile Include="App\Util\DiceResult.cs" />
@@ -203,7 +277,11 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\Gameplay\Combats\" />
+    <Folder Include="App\Gameplay\Crafting\" />
+    <Folder Include="App\Gameplay\Geography\PlaceUtil\" />
     <Folder Include="App\Gameplay\Spell\" />
+    <Folder Include="Test\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ImportGroup Label=".NET DllExport" />

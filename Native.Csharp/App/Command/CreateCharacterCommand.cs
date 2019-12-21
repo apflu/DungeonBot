@@ -14,22 +14,33 @@ namespace Native.Csharp.App.Command
         public void Execute(Player sender, params string[] args)
         {
             MessageSender messageSender = Plugin.GetMessageSender();
-            if (Plugin.GetCharacterHandler().GetCharacters(sender).Length < sender.MaxCharAllowed)
+            if(IsValid(sender, args))
             {
-                //TODO: 种族
-                AbilityScoreGenerator generator = new AbilityScoreGenerator();
-                generator.Generate();
+                if (Plugin.GetCharacterHandler().GetCharacters(sender).Length < sender.Char_MaxAllowed)
+                {
+                    
+                    //TODO: 种族
+                    AbilityScoreGenerator generator = new AbilityScoreGenerator();
+                    generator.Generate();
 
-                sender.Reply(
-                    "你找到了新的冒险者！属性为：\r\n" +
-                    generator.ToString() +"\r\n" +
-                    "使用*招募角色 <角色名> 来确认你的选择！"
-                    );
-
-                sender.PendingCharacter = scores;
+                    sender.Reply(
+                        "你寻找到了新的冒险者！属性为：\r\n" +
+                        generator.ToString() + "\r\n" +
+                        "使用*招募角色 <角色名> 来确认你的选择！"
+                        );
+                    sender.Char_OnList = new List<AbilityScoreGenerator>
+                    {
+                        generator
+                    };
+                }
+                else
+                    messageSender.Send(sender.LastGroupID, "你已达到最大角色数量上限！");
             }
-            else
-                messageSender.Send(sender.LastGroupID, "你已达到最大角色数量上限！");
+        }
+
+        private bool IsValid(Player sender, string[] args)
+        {
+            return true;
         }
     }
 }

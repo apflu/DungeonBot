@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Native.Csharp.App.Util
 {
@@ -73,6 +75,20 @@ namespace Native.Csharp.App.Util
                 }
             }
         }
-        
+    }
+
+    public class RandomTable<T>
+    {
+        public Dictionary<T, float> Possibilities { get; protected set; }
+        public RandomTable(params KeyValuePair<T, float>[] possibilities)
+        {
+            try
+            {
+                Possibilities = possibilities.ToDictionary(possibility => possibility.Key, possibility => possibility.Value);
+            } catch (ArgumentException ae)
+            {
+                Plugin.GetMessageSender().DebugSend(ae.Message);
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Native.Csharp.App.Gameplay;
 using Native.Csharp.App.Gameplay.Handler;
+using Native.Csharp.App.Gameplay.Items.ItemTypes;
 using Native.Csharp.App.UserInteract;
 using Native.Csharp.App.Util;
 using System;
@@ -28,12 +29,12 @@ namespace Native.Csharp.App.Command
                 {
                     Flag existedJob = character.GetFlag("quantityJobGatheringHerb");
                     //如果有已完成的草药采集
-                    if (existedJob != null)
+                    if (existedJob.Value != null)
                     {
-                        if (int.Parse(existedJob.Content) != 0)
+                        if (int.Parse(existedJob.Value) != 0)
                         {
                             //TODO: 创建JobHandler
-                            Item[] gatheredItem = Plugin.GetHerbHandler().GetHerb(sender, int.Parse(existedJob.Content));
+                            IItem[] gatheredItem = Plugin.GetHerbHandler().GetHerb(sender, int.Parse(existedJob.Value));
 
                             sender.GetCurrentCharacter().Inventory.AddItem(gatheredItem);
                             result += character.Name + "上次采集到了" + ItemHandler.ConvertToString(gatheredItem) + "！\r\n";

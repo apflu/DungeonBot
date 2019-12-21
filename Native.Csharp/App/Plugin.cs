@@ -1,4 +1,5 @@
 ﻿using Native.Csharp.App.Command;
+using Native.Csharp.App.Events;
 using Native.Csharp.App.Gameplay.Handler;
 using Native.Csharp.App.UserInteract;
 using System;
@@ -13,11 +14,15 @@ namespace Native.Csharp.App
     public static class Plugin
     {
         private static MessageSender messageSender;
+        private static LocaleManager localeManager;
+
         private static PlayerHandler playerHandler;
         private static CommandHandler commandHandler;
         private static ItemHandler itemHandler;
         private static HerbHandler herbHandler;
         private static CharacterHandler characterHandler;
+
+        private static EventContainer eventContainer;
 
         public static Values Values;
 
@@ -44,6 +49,22 @@ namespace Native.Csharp.App
             }
             return false;
 
+        }
+
+        //LocaleManager
+        public static LocaleManager GetLocaleManager()
+        {
+            return localeManager;
+        }
+
+        public static bool SetLocaleManager(LocaleManager manager)
+        {
+            if(localeManager == null)
+            {
+                localeManager = manager;
+                return true;
+            }
+            return false;
         }
 
         //PlayerHandler
@@ -107,6 +128,19 @@ namespace Native.Csharp.App
             if (characterHandler == null)
             {
                 characterHandler = handler;
+                return true;
+            }
+            return false;
+        }
+
+        //EventContainer
+        public static EventContainer GetEventContainer() => eventContainer;
+
+        public static bool SetEventContainer(EventContainer container)
+        {
+            if (eventContainer == null)
+            {
+                eventContainer = container;
                 return true;
             }
             return false;

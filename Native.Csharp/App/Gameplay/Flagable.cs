@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay
 {
-    public class Flagable : IFlagable
+    public abstract class Flagable : IFlagable
     {
-        private readonly ArrayList Flags;
+        private readonly List<Flag> Flags;
 
         internal Flagable()
         {
-            Flags = new ArrayList();
+            Flags = new List<Flag>();
         }
 
         /// <summary>
-        /// 获取玩家的一项属性
+        /// 获取一项属性
         /// </summary>
         /// <param name="name">属性名</param>
         /// <returns>若不存在则为null</returns>
@@ -25,7 +25,7 @@ namespace Native.Csharp.App.Gameplay
         {
             foreach (Flag flag in Flags)
             {
-                if (flag.Name == name)
+                if (flag.Key == name)
                     return flag;
             }
             return null;
@@ -35,17 +35,17 @@ namespace Native.Csharp.App.Gameplay
         {
             foreach(Flag flag in flags)
             {
-                Flag existedFlag = GetFlag(flag.Name);
+                Flag existedFlag = GetFlag(flag.Key);
 
                 if (existedFlag != null)
-                    existedFlag.Content = flag.Content;
+                    existedFlag.Value = flag.Value;
                 else
                     Flags.Add(flag);
             }
         }
 
         /// <summary>
-        /// 根据属性名，移除玩家的一项属性
+        /// 根据属性名，移除一项属性
         /// </summary>
         /// <param name="flagName">属性名</param>
         /// <returns>成功true，失败false</returns>
@@ -64,7 +64,7 @@ namespace Native.Csharp.App.Gameplay
         {
             foreach (Flag flag in Flags)
             {
-                if (flag.Name == flagName)
+                if (flag.Key == flagName)
                     return true;
             }
             return false;

@@ -1,6 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
+using Native.Csharp.App.Gameplay;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +28,7 @@ namespace Native.Csharp.App.Data
             string connectionInfo = "server=" + host + ";user=" + username + ";database=dungeonrpg;port=" + port + ";password=" + password;
             mySqlConnection = new MySqlConnection(connectionInfo);
 
-
+            DataSet players = new DataSet();
         }
 
         public void EndTask()
@@ -37,3 +40,4 @@ namespace Native.Csharp.App.Data
         }
     }
 }
+ 

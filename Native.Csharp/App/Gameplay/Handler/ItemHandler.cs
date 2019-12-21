@@ -1,4 +1,7 @@
 ﻿using Native.Csharp.App.Gameplay.Generator;
+using Native.Csharp.App.Gameplay.Items.Herbs;
+using Native.Csharp.App.Gameplay.Items.ItemTypes;
+using Native.Csharp.App.UserInteract;
 using Native.Csharp.App.Util;
 using System;
 using System.Collections;
@@ -11,18 +14,22 @@ namespace Native.Csharp.App.Gameplay.Handler
 {
     public class ItemHandler
     {
-        public ArrayList ItemList { get; private set; }
+        public List<IItem> ItemList { get; }
         public RandomTable DefaultRandomTable { get; private set; }
         public ItemGenerator DefaultItemGenerator { get; private set; }
         public ItemHandler()
         {
-            ItemList = new ArrayList
+            ItemList = new List<IItem>
             {
-                new Item(1, "杂草"),
-                new Item(2, "闪光蕨"),
-                new Item(3, "猫薄荷"),
-                new Item(4, "蜜汁浆果"),
-                new Item(5, "龙息草")
+                //食物
+
+
+                //草药
+                new Weed(),
+                new SparkledFern(),
+                new Catnip(),
+                new HoneyBerry(),
+                new DragonBreath()
             };
 
             //debug以及临时用default变量
@@ -37,19 +44,32 @@ namespace Native.Csharp.App.Gameplay.Handler
         }
 
         /// <summary>
-        /// 将数组转换成文本
+        /// 将物品组转换成文本
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public static string ConvertToString(params Item[] items)
+        public static string ConvertToString(params IItem[] items)
         {
             string result = "";
 
-            foreach(Item item in items)
+            foreach(IItem item in items)
             {
                 result += item.ItemName + "、";
             }
             return result.TrimEnd('、');
+        }
+
+        public bool Register(params IItem[] items)
+        {
+            foreach(IItem item in items)
+            {
+                if(!ItemList.Contains(item))
+                {
+                    ItemList.Add(item);
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>
@@ -57,9 +77,9 @@ namespace Native.Csharp.App.Gameplay.Handler
         /// </summary>
         /// <param name="itemID">物品id</param>
         /// <returns></returns>
-        public Item Parse(int itemID)
+        public IItem Parse(int itemID)
         {
-            foreach (Item item in ItemList)
+            foreach (IItem item in ItemList)
                 if (item.ItemID == itemID)
                     return item;
             return null;
@@ -68,13 +88,16 @@ namespace Native.Csharp.App.Gameplay.Handler
         /// <summary>
         /// 使用物品名来索引，如不存在则返回null
         /// </summary>
-        /// <param name="itemName">物品名称</param>
+        /// <param name="itemName">任意语言下的物品名称</param>
         /// <returns></returns>
-        public Item Parse(string itemName)
+        public IItem Parse(string itemName)
         {
-            foreach (Item item in ItemList)
-                if (item.ItemName == itemName)
-                    return item;
+            foreach (IItem item in ItemList)
+                foreach (Locale locale in Plugin.GetLocaleManager().GetAllLocales())
+                {
+                    if (locale.GetValue(item.ItemName) == itemName)
+                        return item;
+                }
             return null;
         }
     }

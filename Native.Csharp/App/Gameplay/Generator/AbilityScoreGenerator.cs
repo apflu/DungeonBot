@@ -1,4 +1,5 @@
-﻿using Native.Csharp.App.Util;
+﻿using Native.Csharp.App.UserInteract;
+using Native.Csharp.App.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,12 +14,24 @@ namespace Native.Csharp.App.Gameplay.Generator
         internal byte[] RaceModifiers;
 
         private byte[] scores;
-        public byte[] Modifiers;
+        public int[] Modifiers;
         public byte[] Results;
 
         public AbilityScoreGenerator()
         {
             RaceModifiers = new byte[6]
+            {
+                0, 0, 0, 0, 0, 0
+            };
+            scores = new byte[6]
+            {
+                0, 0, 0, 0, 0, 0
+            };
+            Results = new byte[6]
+            {
+                0, 0, 0, 0, 0, 0
+            };
+            Modifiers = new int[6]
             {
                 0, 0, 0, 0, 0, 0
             };
@@ -79,7 +92,7 @@ namespace Native.Csharp.App.Gameplay.Generator
             for (int i = 0; i < 6; i++)
             {
                 result[i] = (byte)(scores[i] + RaceModifiers[i]);
-                Modifiers[i] = (byte)((result[i] - 10) / 2);
+                Modifiers[i] = ((result[i] - 10) / 2);
             }
                 
             Results = result;

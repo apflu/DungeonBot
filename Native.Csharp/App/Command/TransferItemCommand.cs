@@ -15,7 +15,7 @@ namespace Native.Csharp.App.Command
         }
         private bool IsValid(Player sender, string[] args) 
         {
-            
+            return true;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Native.Csharp.App.Util;
+﻿using Native.Csharp.App.Gameplay.Items.ItemTypes;
+using Native.Csharp.App.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +17,13 @@ namespace Native.Csharp.App.Gameplay.Generator
             table = randomTable;
         }
 
-        public Item[] Generate(int quantity)
+        public IItem[] Generate(int quantity)
         {
-            Item[] result = new Item[quantity];
+            IItem[] result = new IItem[quantity];
             for (int i = 0; i < quantity; i++)
             {
                 table.DoRandomize();
-                result[i] = (Item) table.GetResult().Content;
+                result[i] = (IItem) table.GetResult().Content;
             }
             return result;
         }
