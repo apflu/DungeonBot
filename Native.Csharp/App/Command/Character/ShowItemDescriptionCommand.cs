@@ -46,7 +46,7 @@ namespace Native.Csharp.App.Command
             }
             if (args.Length > 2)
             {
-                sender.Reply();
+                //sender.Reply();
                 return false;
             }
             return true;

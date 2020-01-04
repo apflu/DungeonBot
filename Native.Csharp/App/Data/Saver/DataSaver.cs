@@ -21,16 +21,22 @@ namespace Native.Csharp.App.Data.Saver
             foreach (DataSet dataSet in dataSets)
                 AllData.Merge(dataSet);
 
+            Plugin.MessageSender.DebugSend("合并数据完毕！");
+
             DirectoryInfo configDir = new DirectoryInfo(Common.AppDirectory);
             if (!configDir.Exists)
                 configDir.Create();
 
             string dataFile = configDir.FullName + "data.xml";
 
+            Plugin.MessageSender.DebugSend(configDir.FullName + "data." + DateTime.Now);
+
             if (File.Exists(dataFile))
-                File.Move(dataFile, configDir.FullName + "data." + DateTime.Now);
-            
-            File.WriteAllText(configDir.FullName + "data.xml", AllData.GetXml());
+                File.Copy(dataFile, configDir.FullName + "data." + DateTime.Now.Ticks);
+
+            Plugin.MessageSender.DebugSend("正在保存文件…");
+
+            File.WriteAllText(dataFile, AllData.GetXml());
 
             AllData.Dispose();
         }

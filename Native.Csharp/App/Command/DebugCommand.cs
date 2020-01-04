@@ -21,7 +21,6 @@ namespace Native.Csharp.App.Command
                     Plugin.PlayerHandler.Save()
                     );
                 Plugin.MessageSender.DebugSend("保存数据成功！");
-
             }
             catch (Exception ex)
             {

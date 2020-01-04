@@ -18,14 +18,14 @@ namespace Native.Csharp.App.Command
 
                 if (string.IsNullOrEmpty(content))
                 {
-                    sender.Reply("INVENTORY_CONTENT_EMPTY", new Dictionary<string, string>
+                    sender.Reply("{INVENTORY_CONTENT_EMPTY}", new Dictionary<string, string>
                     {
                         { "character_name", sender.GetCurrentCharacter().Name }
                     });
                 }
                 else
                 {
-                    sender.Reply("INVENTORY_CONTENT", new Dictionary<string, string>
+                    sender.Reply("{INVENTORY_CONTENT}", new Dictionary<string, string>
                     {
                         { "character_name", sender.GetCurrentCharacter().Name },
                         { "content", sender.GetCurrentCharacter().Inventory.ToString() }

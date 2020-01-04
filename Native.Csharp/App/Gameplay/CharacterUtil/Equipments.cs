@@ -9,7 +9,7 @@ namespace Native.Csharp.App.Gameplay.CharacterUtil
 {
     public class Equipments
     {
-        public bool Equip(Item item)
+        /*public bool Equip(Item item)
         {
 
         }
@@ -17,6 +17,6 @@ namespace Native.Csharp.App.Gameplay.CharacterUtil
         public bool Unequip(Item item)
         {
 
-        }
+        }*/
     }
 }

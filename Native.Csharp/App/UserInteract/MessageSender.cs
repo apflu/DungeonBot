@@ -86,6 +86,9 @@ namespace Native.Csharp.App.UserInteract
         }
         public string ParseLocaleMessage(Player target, string message)
         {
+            if (target.CurrentLocale == null)
+                target.CurrentLocale = Plugin.LocaleManager.GetLocale("LocaleDefault");
+
             string preformatMessage = (string)message.Clone();
             for (; ; )
             {
