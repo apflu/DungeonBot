@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Native.Csharp.App.Gameplay.AbstractTool;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Native.Csharp.App.Gameplay
 {
     public abstract class Flagable : IFlagable
     {
-        private readonly List<Flag> Flags;
+        protected internal readonly List<Flag> Flags;
 
         internal Flagable()
         {
@@ -54,11 +55,13 @@ namespace Native.Csharp.App.Gameplay
             Flag existedFlag = GetFlag(flagName);
 
             if (existedFlag != null)
-                Flags.Remove(existedFlag);
-            else
-                return false;
-            return true;
+            {
+                return Flags.Remove(existedFlag);
+            }
+            return false;
         }
+
+        public bool RemoveFlag(Flag flag) => Flags.Remove(flag);
 
         public bool IsFlagExist(string flagName)
         {

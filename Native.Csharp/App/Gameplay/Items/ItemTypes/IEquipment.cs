@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay.Items.ItemTypes
 {
-    interface IEquipment : IItem
+    public interface IEquipment : Item
     {
+        void Equip(Character sender);
+        void Unequip(Character sender);
     }
 }

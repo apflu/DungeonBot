@@ -10,15 +10,15 @@ namespace Native.Csharp.App.Gameplay
     public class ItemStack
     {
         //如果要变更物品，简单地创建一个新的即可
-        public IItem Item { get; private set; }
+        public Item Item { get; private set; }
         public int Quantity { get; set; }
 
-        public ItemStack(IItem item)
+        public ItemStack(Item item)
         {
             Item = item;
         }
 
-        public ItemStack(IItem item, int quantity)
+        public ItemStack(Item item, int quantity)
         {
             Item = item;
             Quantity = quantity;

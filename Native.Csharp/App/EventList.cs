@@ -16,7 +16,6 @@ namespace Native.Csharp.App
                 Enabled = true
             };
             MinuteTimer.Start();
-            MinuteTimer.Elapsed += new ElapsedEventHandler(Plugin.GetEventContainer().NextMinute);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Native.Csharp.App.Data.Saver;
 using Native.Csharp.App.Gameplay;
 using Native.Csharp.App.Gameplay.Generator;
 
@@ -12,16 +13,20 @@ namespace Native.Csharp.App.Command
     {
         public void Execute(Player sender, params string[] args)
         {
-            if(args.Length > 1)
-                switch (args[1])
-                {
-                    case "AbilityScoreGenerator":
-                        string result = "";
-                        foreach (byte score in new AbilityScoreGenerator().Results)
-                            result += score + " ";
-                        Plugin.GetMessageSender().DebugSend(result);
-                        break;
-                }
+            
+            try
+            {
+                DataSaver.Save(
+                    Plugin.CharacterHandler.Save(),
+                    Plugin.PlayerHandler.Save()
+                    );
+                Plugin.MessageSender.DebugSend("保存数据成功！");
+
+            }
+            catch (Exception ex)
+            {
+                Plugin.MessageSender.DebugSend(ex.ToString());
+            }
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿using Native.Csharp.App.Gameplay.Generator;
+﻿using Native.Csharp.App.Gameplay.CharacterUtil.Classes.Template;
+using Native.Csharp.App.Gameplay.CharacterUtil.Skills;
+using Native.Csharp.App.Gameplay.Generator;
 using Native.Csharp.App.Gameplay.Modifiers;
 using Native.Csharp.App.Gameplay.Modifiers.ModifierTypes;
+using Native.Csharp.App.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +28,27 @@ namespace Native.Csharp.App.Gameplay.CharacterUtil
         public byte HPMax { get; internal set; }
         public int HPTemp { get; internal set; }
 
+        public int XPCurrent { get; protected internal set; }
+        public int XPLevelUp { get; }
+        public int HealthDices { get; internal set; }
+        public int ExtraHealthPointsPerLevel;
+        public List<CharacterClass> Classes { get; }
+        public bool HasPendingLevel;
 
-        
+        public int TotalSkillPoints;
+        public int ExtraSkillPointsPerLevel;
+
+        public CharacterSkills Skills { get; }
+
+        public delegate void Upgrade(CharacterClass @class);
+        public event Upgrade LevelUpEvent;
+
+        private CharacterProperties()
+        {
+            Skills = new CharacterSkills();
+            Classes = new List<CharacterClass>();
+        }
+
 
         /// <summary>
         /// 某些情况下（例如不死生物和构造体）不存在某项属性，
@@ -39,6 +61,7 @@ namespace Native.Csharp.App.Gameplay.CharacterUtil
         /// <param name="WIS">感知</param>
         /// <param name="CHA">魅力</param>
         public CharacterProperties(byte STR, byte DEX, byte CON, byte INT, byte WIS, byte CHA)
+            : this()
         {
             this.STR = STR;
             this.DEX = DEX;
@@ -50,13 +73,6 @@ namespace Native.Csharp.App.Gameplay.CharacterUtil
 
         public CharacterProperties(byte[] AbilityScores)
             : this(AbilityScores[0], AbilityScores[1], AbilityScores[2], AbilityScores[3], AbilityScores[4], AbilityScores[5]) { }
-
-        public CharacterProperties(byte STR, byte DEX, byte CON, byte INT, byte WIS, byte CHA, byte maxHP)
-            : this(STR, DEX, CON, INT, WIS, CHA)
-        {
-            HPMax = maxHP;
-        }
-
         public CharacterProperties(AbilityScoreGenerator generator)
             : this(generator.Results)
         {
@@ -82,7 +98,52 @@ namespace Native.Csharp.App.Gameplay.CharacterUtil
             return null;
         }
 
-        
+        public void AddXP(int amount)
+        {
+            XPCurrent += amount;
+            if (XPCurrent > XPLevelUp)
+                HasPendingLevel = true;
+        }
+
+        public void LevelUp(CharacterClass @class)
+        {
+            @class.LevelUp();
+            CalcSP(@class);
+            CalcHP(@class);
+            LevelUpEvent(@class);
+
+            HasPendingLevel = false;
+        }
+
+        private void CalcSP(CharacterClass @class)
+        {
+            int result = 0;
+
+            result += @class.SkillPointPerLevel + Values.GetModifier(INT);
+            result += ExtraSkillPointsPerLevel;
+
+            TotalSkillPoints += result;
+        }
+
+        private void CalcHP(CharacterClass @class)
+        {
+            int result = 0;
+
+            Dice HealthDice = Plugin.Values.GetDice("1d" + @class.HealthPointPerLevel);
+            result += HealthDice.GetResult().IntResult;
+
+            @class.HPGrowth.Add((byte)result);
+
+            result += ExtraHealthPointsPerLevel;
+
+            HPMax += (byte)result;
+        }
+
+        public void JoinClass(CharacterClass @class)
+        {
+            Classes.Add(@class);
+            @class.LevelUp();
+        }
 
         
 

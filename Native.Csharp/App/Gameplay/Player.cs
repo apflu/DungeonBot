@@ -23,7 +23,7 @@ namespace Native.Csharp.App.Gameplay
         public Locale CurrentLocale { get; set; }
 
         public Inventory Inventory { get; protected set; }
-        public byte Char_MaxAllowed { get; protected set; }
+        public int Char_MaxAllowed { get; protected set; }
         public List<AbilityScoreGenerator> Char_OnList { get; set; }
         public int Char_MaxOnList { get; protected set; }
 
@@ -55,54 +55,16 @@ namespace Native.Csharp.App.Gameplay
          * ================================================================
          */
 
-        private void Send(LocaleKey key, Dictionary<string, string> args)
+        public void Reply(string message)
+        {
+            Reply(message, null);
+        }
+        public void Reply(string message, Dictionary<string, string> args)
         {
             if (LastGroupID > -1)
-                Plugin.GetMessageSender().Send(this, key, args);
+                Plugin.GetMessageSender().Send(this, message, args);
             else
-                Plugin.GetMessageSender().Whisper(this, key, args);
-        }
-
-        private void Send(string message)
-        {
-            if (LastGroupID > -1)
-                Plugin.GetMessageSender().Send(LastGroupID, message);
-            else
-                Plugin.GetMessageSender().Whisper(QQID, message);
-        }
-
-        /// <summary>
-        /// 对该名玩家回复一条消息
-        /// </summary>
-        /// <param name="message"></param>
-        public void Reply(string messageKey, Dictionary<string, string> args)
-        {
-            //检测是否存在预格式化文本
-            bool isPreformatMesssageExists = true;
-            while (isPreformatMesssageExists)
-            {
-                isPreformatMesssageExists = false;
-                foreach (KeyValuePair<string, string> arg in args)
-                {
-                    LocaleKey parsedKey = Plugin.GetLocaleManager().GetKey(arg.Key);
-                    if (parsedKey != null)
-                    {
-                        args.Remove(arg.Key);
-                        args.Add(arg.Key, CurrentLocale.GetValue(parsedKey));
-                        isPreformatMesssageExists = true;
-                    }
-                }
-            } //直到不剩下预格式化文本为止
-            LocaleKey key = Plugin.GetLocaleManager().GetKey(messageKey);
-            if (key != null)
-                Send(key, args);
-            else
-                Send(messageKey);
-        }
-
-        public void Reply(string messageKey, params KeyValuePair<string, string>[] args)
-        {
-            Reply(messageKey, args.ToDictionary(arg => arg.Key, arg => arg.Value));
+                Plugin.GetMessageSender().Whisper(this, message, args);
         }
 
         /*
@@ -115,15 +77,13 @@ namespace Native.Csharp.App.Gameplay
 
         public string GetName()
         {
-            return Common.CqApi.GetMemberInfo(LastGroupID, QQID).Nick;
+            if (string.IsNullOrEmpty(Name))
+                return Common.CqApi.GetMemberInfo(LastGroupID, QQID).Nick;
+            return Name;
         }
-
-        public bool SetName(string name)
+        public void SetName(string name)
         {
-            if(!Regex.IsMatch(name, Values.RegexName))
-                return false;
             Name = name;
-            return true;
         }
 
         /*

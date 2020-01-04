@@ -1,5 +1,7 @@
 ﻿using Native.Csharp.App.Command;
+using Native.Csharp.App.Data.Saver;
 using Native.Csharp.App.Events;
+using Native.Csharp.App.Gameplay.Geography;
 using Native.Csharp.App.Gameplay.Handler;
 using Native.Csharp.App.UserInteract;
 using System;
@@ -8,23 +10,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Native.Csharp.App
 {
     public static class Plugin
     {
-        private static MessageSender messageSender;
-        private static LocaleManager localeManager;
+        public static MessageSender MessageSender { get; }
+        public static LocaleManager LocaleManager { get; }
 
-        private static PlayerHandler playerHandler;
-        private static CommandHandler commandHandler;
-        private static ItemHandler itemHandler;
-        private static HerbHandler herbHandler;
-        private static CharacterHandler characterHandler;
+        public static PlayerHandler PlayerHandler { get; }
+        public static CommandHandler CommandHandler { get; }
+        public static ItemHandler ItemHandler { get; }
+        public static HerbHandler HerbHandler { get; }
+        public static CharacterHandler CharacterHandler { get; }
+        public static EventContainer EventContainer { get; }
 
-        private static EventContainer eventContainer;
+        public static Timer AutoSaveTimer { get; }
 
-        public static Values Values;
+
+        public static Values Values { get; }
+        
+
+        static Plugin()
+        {
+            MessageSender = new MessageSender();
+            LocaleManager = new LocaleManager();
+
+            PlayerHandler = new PlayerHandler();
+            CommandHandler = new CommandHandler();
+            ItemHandler = new ItemHandler();
+            HerbHandler = new HerbHandler();
+            CharacterHandler = new CharacterHandler();
+            EventContainer = new EventContainer();
+            
+            Values = new Values();
+            
+            AutoSaveTimer = new Timer()
+            {
+                Interval = 1800000,
+                AutoReset = true,
+                Enabled = true
+            };
+            AutoSaveTimer.Elapsed += DataSaver.AutoSave;
+        }
 
         /*
          * ===========================变量Getter/Setter区域===========================
@@ -37,113 +66,31 @@ namespace Native.Csharp.App
         //MessageSender
         public static MessageSender GetMessageSender()
         {
-            return messageSender;
-        }
-
-        public static bool SetMessageSender(MessageSender sender)
-        {
-            if (messageSender == null)
-            {
-                messageSender = sender;
-                return true;
-            }
-            return false;
-
+            return MessageSender;
         }
 
         //LocaleManager
         public static LocaleManager GetLocaleManager()
         {
-            return localeManager;
-        }
-
-        public static bool SetLocaleManager(LocaleManager manager)
-        {
-            if(localeManager == null)
-            {
-                localeManager = manager;
-                return true;
-            }
-            return false;
+            return LocaleManager;
         }
 
         //PlayerHandler
-        public static PlayerHandler GetPlayerHandler() => playerHandler;
-
-        public static bool SetPlayerHandler(PlayerHandler handler)
-        {
-            if(playerHandler == null)
-            {
-                playerHandler = handler;
-                return true;
-            }
-            return false;
-        }
+        public static PlayerHandler GetPlayerHandler() => PlayerHandler;
 
         //CommandHandler
-        public static CommandHandler GetCommandHandler() => commandHandler;
-
-        public static bool SetCommandHandler(CommandHandler handler)
-        {
-            if (commandHandler == null)
-            {
-                commandHandler = handler;
-                return true;
-            }
-            return false;
-        }
+        public static CommandHandler GetCommandHandler() => CommandHandler;
 
 
         //ItemHandler
-        public static ItemHandler GetItemHandler() => itemHandler;
-
-        public static bool SetItemHandler(ItemHandler handler)
-        {
-            if (itemHandler == null)
-            {
-                itemHandler = handler;
-                return true;
-            }
-            return false;
-        }
+        public static ItemHandler GetItemHandler() => ItemHandler;
 
         //HerbHandler
-        public static HerbHandler GetHerbHandler() => herbHandler;
-
-        public static bool SetHerbHandler(HerbHandler handler)
-        {
-            if (herbHandler == null)
-            {
-                herbHandler = handler;
-                return true;
-            }
-            return false;
-        }
+        public static HerbHandler GetHerbHandler() => HerbHandler;
+        
 
         //CharacterHandler
-        public static CharacterHandler GetCharacterHandler() => characterHandler;
+        public static CharacterHandler GetCharacterHandler() => CharacterHandler;
 
-        public static bool SetCharacterHandler(CharacterHandler handler)
-        {
-            if (characterHandler == null)
-            {
-                characterHandler = handler;
-                return true;
-            }
-            return false;
-        }
-
-        //EventContainer
-        public static EventContainer GetEventContainer() => eventContainer;
-
-        public static bool SetEventContainer(EventContainer container)
-        {
-            if (eventContainer == null)
-            {
-                eventContainer = container;
-                return true;
-            }
-            return false;
-        }
     }
 }

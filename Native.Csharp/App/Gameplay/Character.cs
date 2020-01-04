@@ -1,45 +1,60 @@
-﻿using Native.Csharp.App.Gameplay.CharacterUtil;
+﻿using Native.Csharp.App.Data;
+using Native.Csharp.App.Gameplay.CharacterUtil;
+using Native.Csharp.App.Gameplay.CharacterUtil.Classes;
+using Native.Csharp.App.Gameplay.CharacterUtil.Classes.Template;
 using Native.Csharp.App.Gameplay.Generator;
+using Native.Csharp.App.Gameplay.Geography.LocationUtil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay
 {
-    public class Character : Flagable, IFlagable
+    public class Character : CharacterCore
     {
         //TODO: 继承ICloneable
 
         //private int cid;
-        public Inventory Inventory { get; protected set; }
         public string Name { get; protected set; }
+
+        //基础信息
+        public Inventory Inventory { get; protected set; }
         public Player Owner { get; protected set; }
-        public CharacterProperties Properties { get; }
-        public CharacterModifiers Modifiers { get; }
 
-        public string IsCharacterFinished { get; protected set; }
-        protected DateTime NextFreeTime { private get; set; }
+        //附属类别
+        public CharacterProperties Properties { get; internal set; }
+        public CharacterModifiers Modifiers { get; internal set; }
+        
+        public ILocation CurrentLocation { get; protected set; }
+        protected internal DateTime NextFreeTime { get; set; }
 
-        public Character(string name, AbilityScoreGenerator properties)
+        public Character(string name)
             : base()
         {
             NextFreeTime = DateTime.Now;
-            Inventory = new Inventory();
             Name = name;
             Owner = Plugin.GetPlayerHandler().PlayerWorld;
+
+            Inventory = new Inventory();
+        }
+
+        public Character(string name, Player owner)
+            : this(name)
+        {
+            SetOwner(owner);
+        }
+
+        public Character(string name, AbilityScoreGenerator properties)
+            : this(name)
+        {
             Properties = new CharacterProperties(properties)
             {
                 Owner = this
             };
-        }
-
-        public Character(string name, AbilityScoreGenerator properties, Player owner)
-            : this(name, properties)
-        {
-            SetOwner(owner);
         }
 
         public Character SetOwner(Player owner)
@@ -133,7 +148,7 @@ namespace Native.Csharp.App.Gameplay
 
         public bool IsDoingJob()
         {
-            return GetFlag(Flag.Char_FlagName_JobCurrent).Value != Flag.Char_FlagContent_JobNone;
+            return GetFlag(Flag.Key_JobCurrent).Value != Flag.Value_JobNone;
         }
 
         /// <summary>
@@ -144,14 +159,20 @@ namespace Native.Csharp.App.Gameplay
         /// <param name="period"></param>
         public void SetJob(string job, TimeSpan period)
         {
-            SetFlag(new Flag(Flag.Char_FlagName_JobCurrent, job));
+            SetFlag(new Flag(Flag.Key_JobCurrent, job));
             AddBusyTime(period);
         }
 
         public void ClearJob()
-        {
-            SetFlag(new Flag(Flag.Char_FlagName_JobCurrent, Flag.Char_FlagContent_JobNone));
+        { 
+            SetFlag(new Flag(Flag.Key_JobCurrent, Flag.Value_JobNone));
             NextFreeTime = DateTime.Now;
+        }
+
+        public void Rest()
+        {
+            Modifiers.NextFatigueTime = DateTime.Now + Values.Day;
+            Heal(Properties.HealthDices);
         }
 
         /*
@@ -172,21 +193,50 @@ namespace Native.Csharp.App.Gameplay
                 new Flag(Flag.Action_FlagName_Object, Name) //我自己又是谁
                 );
 
-            Properties.HPCurrent += (byte) amount;
-            if(Properties.HPCurrent > Properties.HPMax)
+            
+            return result;
+        }
+
+        public void Heal(int amount, bool isExceedHPTempHP = false)
+        {
+            if (Owner != null)
             {
-                byte exceededHeal = (byte) (Properties.HPCurrent - Properties.HPMax);
+                Owner.Reply(""); //TODO: 受到治疗的提示信息
+            }
+            Properties.HPCurrent += (byte)amount;
+            if (Properties.HPCurrent > Properties.HPMax)
+            {
+                byte exceededHeal = (byte)(Properties.HPCurrent - Properties.HPMax);
 
                 Properties.HPCurrent = Properties.HPMax;
 
                 if (isExceedHPTempHP)
                 {
                     Properties.HPTemp += exceededHeal;
-                    result.SetFlag(new Flag(Flag.Action_FlagName_TypeHeal_Overheal, exceededHeal + ""));
                 }
             }
-            return result;
         }
+
+        /*
+         * ===========================移动===========================
+         * =                                                        =
+         * =            这里列出了玩家的移动相关方法。              =
+         * =                                                        =
+         * ==========================================================
+         */
+
+        /// <summary>
+        /// 将角色移动到一个新的位置
+        /// 注意：尽可能将角色移动至最符合其所在地点的位置。
+        /// </summary>
+        /// <param name="newLocation"></param>
+        public void Move(ILocation newLocation)
+        {
+            CurrentLocation.Unregister(this);
+            newLocation.Register(this);
+        }
+
+        
 
         //TODO: 重写Equals(object)方法
     }

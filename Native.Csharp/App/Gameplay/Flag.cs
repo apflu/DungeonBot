@@ -19,10 +19,12 @@ namespace Native.Csharp.App.Gameplay
          * ==============================================================
          */
         
-        public const string Char_FlagName_JobCurrent = "JobCurrent";
-            public const string Char_FlagContent_JobNone = "None";
-            public const string Char_FlagContent_JobHerb = "GatherHerb";
-                public const string Char_FlagName_JobHerb_Amount = "JobHerbAmount";
+        public const string Key_JobCurrent = "JobCurrent";
+            public const string Value_JobNone = "None";
+            public const string Value_JobHerb = "GatherHerb";
+                public const string Key_JobHerb_Amount = "JobHerbAmount";
+            public const string Value_JobFood = "GatherFood";
+                public const string Key_JobFood_Amount = "JobFoodAmount";
 
         public const string Char_FlagName_TypeCharacter = "CharType";
             public const string Char_FlagContent_TypeTemp = "Temp";

@@ -17,13 +17,13 @@ namespace Native.Csharp.App.Gameplay.Generator
             table = randomTable;
         }
 
-        public IItem[] Generate(int quantity)
+        public Item[] Generate(int quantity)
         {
-            IItem[] result = new IItem[quantity];
+            Item[] result = new Item[quantity];
             for (int i = 0; i < quantity; i++)
             {
                 table.DoRandomize();
-                result[i] = (IItem) table.GetResult().Content;
+                result[i] = (Item) table.GetResult().Content;
             }
             return result;
         }

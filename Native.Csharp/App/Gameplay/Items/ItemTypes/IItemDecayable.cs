@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay.Items.ItemTypes
 {
-    public interface IItemDecayable : IItem
+    public interface IItemDecayable : Item
     {
         DateTime DecayTime { get; set; }
         bool IsDecayed { get; set; }

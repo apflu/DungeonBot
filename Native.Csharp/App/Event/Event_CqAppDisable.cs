@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Native.Csharp.App.Data.Saver;
 using Native.Csharp.Sdk.Cqp.EventArgs;
 using Native.Csharp.Sdk.Cqp.Interface;
 
@@ -23,8 +25,27 @@ namespace Native.Csharp.App.Event
             // 当应用被停用前，本方法将被调用一次
             // 如果酷Q载入时应用已被停用，则本方法【不会】被调用。
             // 无论本应用是否被启用，酷Q关闭前本方法都【不会】被调用。
+            try
+            {
+                SaveData();
+            }
+            catch (Exception ex)
+            {
+                DirectoryInfo configDir = new DirectoryInfo(Common.AppDirectory);
+                if (!configDir.Exists)
+                    configDir.Create();
+                File.WriteAllText(configDir.FullName + "log.txt", ex.ToString());
+            }
 
             Common.IsRunning = false;
         }
+
+        private void SaveData()
+        {
+            
+            DataSaver.Save(Plugin.PlayerHandler.Save(), Plugin.CharacterHandler.Save());
+        }
+
+
     }
 }

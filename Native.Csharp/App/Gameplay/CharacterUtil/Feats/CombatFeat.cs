@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay.CharacterUtil.Feats
 {
-    class CombatFeat
+    public abstract class CombatFeat
     {
     }
 }

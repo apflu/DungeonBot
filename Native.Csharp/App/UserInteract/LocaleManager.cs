@@ -19,6 +19,7 @@ namespace Native.Csharp.App.UserInteract
             { "CHARACTER", new LocaleKey("CHARACTER") },
             { "PLAYER", new LocaleKey("PLAYER") },
             { "NAME", new LocaleKey("NAME") },
+            { "ITEM", new LocaleKey("ITEM") },
 
             //基础状态
             { "EXIST", new LocaleKey("EXIST") },
@@ -67,6 +68,8 @@ namespace Native.Csharp.App.UserInteract
                 "result", "job", "outcome", "quantity", "quantifier") },
             { "JOB_GATHER", new LocaleKey("JOB_GATHER") },
             { "JOB_GATHER_SHORT", new LocaleKey("JOB_GATHER_SHORT") },
+            { "JOB_CHECK", new LocaleKey("JOB_CHECK") },
+            { "JOB_CHECK_SHORT", new LocaleKey("JOB_CHECK_SHORT") },
 
             //物品类型
             { "ITEM_TYPE_FOOD", new LocaleKey("ITEM_TYPE_FOOD") },
@@ -75,8 +78,19 @@ namespace Native.Csharp.App.UserInteract
             //物品名称和描述
             { "ITEM_UNDEFINED_NAME", new LocaleKey("ITEM_UNDEFINED_NAME") },
             { "ITEM_UNDEFINED_DESCRIPTION", new LocaleKey("ITEM_UNDEFINED_DESCRIPTION") },
+            { "ITEM_UNKNOWN_HERB_NAME", new LocaleKey("ITEM_UNKNOWN_HERB_NAME") },
+            { "ITEM_UNKNOWN_HERB_DESCRIPTION", new LocaleKey("ITEM_UNKNOWN_HERB_DESCRIPTION") },
+            { "ITEM_UNKNOWN_FOOD_NAME", new LocaleKey("ITEM_UNKNOWN_FOOD_NAME") },
+            { "ITEM_UNKNOWN_FOOD_DESCRIPTION", new LocaleKey("ITEM_UNKNOWN_FOOD_DESCRIPTION") },
+
             { "ITEM_BERRY_NAME", new LocaleKey("ITEM_BERRY_NAME") },
             { "ITEM_BERRY_DESCRIPTION", new LocaleKey("ITEM_BERRY_DESCRIPTION") },
+            { "ITEM_HONEY_BERRY_NAME", new LocaleKey("ITEM_HONEY_BERRY_NAME") },
+            { "ITEM_HONEY_BERRY_DESCRIPTION", new LocaleKey("ITEM_HONEY_BERRY_DESCRIPTION") },
+            { "ITEM_WEED_NAME", new LocaleKey("ITEM_WEED_NAME") },
+            { "ITEM_CATNIP_NAME", new LocaleKey("ITEM_CATNIP_NAME") },
+            { "ITEM_SPARKLED_FERN_NAME", new LocaleKey("ITEM_SPARKLED_FERN_NAME") },
+            { "ITEM_DRAGONBREATH_NAME", new LocaleKey("ITEM_DRAGONBREATH_NAME") },
 
             //物品互动
             { "ITEM_NO_EFFECT", new LocaleKey("ITEM_NO_EFFECT") },
@@ -104,53 +118,6 @@ namespace Native.Csharp.App.UserInteract
             {
                 return null;
             }
-        }
-
-        /// <summary>
-        /// 使用参数来处理一段预设文本
-        /// </summary>
-        /// <param name="preformatMessage">玩家语言下的待处理文本</param>
-        /// <param name="args">用于处理文本的参数</param>
-        /// <returns></returns>
-        public string Format(string preformatMessage, Dictionary<string, string> args)
-        {
-            string result = (string) preformatMessage.Clone();
-            for(; ; )
-            {
-                if ((args == null) || (args.Count == 0))
-                    return result;
-
-                Match argument = Regex.Match(result, Values.RegexLocaleKeyArgument);
-                if (!argument.Success)
-                    return result;
-
-                result = Regex.Replace(
-                    preformatMessage,
-                    Values.RegexLocaleKeyArgument,
-                    new MatchEvaluator(
-                        (match) => //替换{key}为args中的指定输入
-                        {
-                            string arg = match.Value.Substring(1, match.Value.Length - 2); //去掉头尾大括号
-                            foreach(KeyValuePair<string, string> givenArg in args) //从args中寻找匹配项进行替换
-                            {
-                                if(arg == givenArg.Key)
-                                    return givenArg.Value;
-                            }
-                            return arg;
-                        })
-                    );
-            }
-        }
-
-        /// <summary>
-        /// 使用参数来处理一段预设文本
-        /// </summary>
-        /// <param name="preformatMessage">玩家预言下的待处理文本</param>
-        /// <param name="args">用于处理文本的参数</param>
-        /// <returns></returns>
-        public string Format(string preformatMessage, params KeyValuePair<string, string>[] args)
-        {
-            return Format(preformatMessage, args.ToDictionary(arg => arg.Key, arg => arg.Value));
         }
 
         public bool RegisterLocale(Locale locale)

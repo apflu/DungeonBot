@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay.CharacterUtil.Classes
 {
+    /// <summary>
+    /// 盗贼
+    /// </summary>
     class ClassRogue
     {
     }

@@ -76,6 +76,7 @@ namespace Native.Csharp.App.Command
 
                 //角色
                 { "*采集草药", Commands["GatherHerbCommand"] },
+                { "*采集药草", Commands["GatherHerbCommand"] },
                 { "*采集杂草", Commands["GatherHerbCommand"] },
                 { "*采集", Commands["GatherHerbCommand"] },
 
@@ -84,10 +85,16 @@ namespace Native.Csharp.App.Command
                 { "*丢掉", Commands["AbandonItemCommand"] },
                 { "*丢", Commands["AbandonItemCommand"] },
 
-                { "*显示物品栏", Commands["ShowInventoryCommand"] },
+                { "*查看物品", Commands["ShowInventoryCommand"] },
+                { "*查看物品栏", Commands["ShowInventoryCommand"] },
                 { "*物品栏", Commands["ShowInventoryCommand"] },
                 { "*显示物品", Commands["ShowInventoryCommand"] },
-                { "*物品", Commands["ShowInventoryCommand"] },
+                { "*显示物品栏", Commands["ShowInventoryCommand"] },
+                { "*所有物品", Commands["ShowInventoryCommand"] },
+                { "*我的物品", Commands["ShowInventoryCommand"] },
+                { "*我的物品栏", Commands["ShowInventoryCommand"] },
+
+
 
                 //
             };

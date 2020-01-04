@@ -12,6 +12,11 @@ namespace Native.Csharp.App.Events
         public delegate void MinuteEvent();
         public event MinuteEvent MinutePassed;
 
+        public enum Priority
+        {
+            Lowest, Low, Normal, High, Highest
+        }
+
         public void NextMinute(object sender, ElapsedEventArgs e)
         {
             MinutePassed();

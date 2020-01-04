@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay.CharacterUtil.Skills
 {
-    public class Profession
+    public class Profession : Skill
     {
+        public override int GetTotalModifier()
+        {
+            return 0;
+        }
     }
 }

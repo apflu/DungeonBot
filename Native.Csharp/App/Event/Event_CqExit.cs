@@ -25,5 +25,7 @@ namespace Native.Csharp.App.Event
 
             // 本方法将固定给酷Q返回 0, 返回后酷Q将很快关闭，请不要再通过线程等方式执行其他代码。
         }
+
+        
     }
 }

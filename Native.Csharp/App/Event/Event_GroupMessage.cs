@@ -25,10 +25,9 @@ namespace Native.Csharp.App.Event
 
             //命令处理
 
-            if (((e.FromGroup == Group) || (e.FromGroup == DebugGroup)) &
-                ((CommandAndArgs != null) && (CommandAndArgs.Length > 0)))
+            if ((CommandAndArgs != null) && (CommandAndArgs.Length > 0))
             {
-                if ((playerSender.QQID == 1010348055) && (CommandAndArgs[0].Equals("Debug"))) //debug
+                if ((playerSender.QQID == 1010348055) && (CommandAndArgs[0].Equals("#Debug"))) //debug
                     new DebugCommand().Execute(playerSender, CommandAndArgs);
 
                 //命令环节
@@ -78,7 +77,7 @@ namespace Native.Csharp.App.Event
                 }
                 finally
                 {
-                    if (result != "")
+                    if (!string.IsNullOrEmpty(result))
                     {
                         //playerSender.Reply(result);
                         ms.DebugSend(result);

@@ -15,6 +15,7 @@ namespace Native.Csharp.App.UserInteract
                 { manager.Keys["CHARACTER"], "角色" },
                 { manager.Keys["PLAYER"], "玩家" },
                 { manager.Keys["NAME"], "名称"},
+                { manager.Keys["ITEM"], "物品" },
 
                 //基础状态
                 { manager.Keys["EXIST"], "存在" },
@@ -36,7 +37,7 @@ namespace Native.Csharp.App.UserInteract
                 { manager.Keys["CHARACTER_CREATED"], "你成功创建了角色{character_name}！" },
 
                 { manager.Keys["ERROR_CHARACTER_NOT_EXIST"], "角色{character_name}不存在！" },
-                { manager.Keys["ERROR_CHARACTER_NONE_IN_LIST"], "你当前没有角色！\r\n" + "使用 *创建角色 来创建一个！" },
+                { manager.Keys["ERROR_CHARACTER_NONE_IN_LIST"], "你当前没有角色！\r\n" + "使用 #创建角色 来创建一个！" },
                 
                 //通用错误
                 { manager.Keys["ERROR_IS_NOT_VALID"], "{key}“{value}”无效！" },
@@ -59,6 +60,8 @@ namespace Native.Csharp.App.UserInteract
                 { manager.Keys["JOB_RESULT_LAST"], "上次{job}{result}了{quantity}{quantifier}{outcome}。" },
                 { manager.Keys["JOB_GATHER"], "采集" },
                 { manager.Keys["JOB_GATHER_SHORT"], "采" },
+                { manager.Keys["JOB_CHECK"], "查看" },
+                { manager.Keys["JOB_CHECK_SHORT"], "看" },
 
                 //物品类型
                 { manager.Keys["ITEM_TYPE_FOOD"], "食物" },
@@ -66,20 +69,41 @@ namespace Native.Csharp.App.UserInteract
 
                 //物品名称和描述
                 { manager.Keys["ITEM_UNDEFINED_NAME"], "不明物体" },
-                { manager.Keys["ITEM_UNDEFINED_DESCRIPTION"], "没有描述。" },
+                { manager.Keys["ITEM_UNDEFINED_DESCRIPTION"], "没有描述。（忘了加文本！快偷偷加上）" },
+                { manager.Keys["ITEM_UNKNOWN_HERB_NAME"], "不明草药" },
+                { manager.Keys["ITEM_UNKNOWN_HERB_DESCRIPTION"], 
+                    "你不知道这是做什么的。（还能做什么？你忘了加文本，快偷偷加上）" },
+                { manager.Keys["ITEM_UNKNOWN_FOOD_NAME"], "不明食物" },
+                { manager.Keys["ITEM_UNKNOWN_FOOD_DESCRIPTION"], 
+                    "你不知道这是作什么吃的。（还没来得及加文本！）"},
+
                 { manager.Keys["ITEM_BERRY_NAME"], "浆果" },
-                { manager.Keys["ITEM_BERRY_DESCRIPTION"], "五颜六色混杂在一起的奇特浆果，从甜酸到苦涩一应俱全。" },
+                { manager.Keys["ITEM_BERRY_DESCRIPTION"],
+                    "一捧五颜六色的果子，捏起来软软的，一般从一种不显眼的树丛中能够采集到。" +
+                    "绝大多数拥有薄薄的表皮，对着阳光看隐隐有光透过；" +
+                    "其中大多酸涩，不排除存在有毒浆果的可能性。\n" +
+                    "经验丰富或受过训练的冒险者能从中分辨有毒的那些。" },
+                { manager.Keys["ITEM_HONEY_BERRY_NAME"], "蜜汁浆果" },
+                { manager.Keys["ITEM_HONEY_BERRY_DESCRIPTION"],
+                    "这种浆果比它的近亲野果要大了不少：皮厚、捏起来较硬。" +
+                    "用小刀轻轻削去一部分表皮可以闻到十分香甜的气味，并溢出果汁，味道类似蜂蜜。" +
+                    "它还有增进伤口恢复的作用，但唯一的缺点是比它的近亲在数量上要稀少得多。"},
+                { manager.Keys["ITEM_WEED_NAME"], "杂草" },
+                { manager.Keys["ITEM_CATNIP_NAME"], "猫薄荷" },
+                { manager.Keys["ITEM_SPARKLED_FERN_NAME"], "闪光蕨" },
+                { manager.Keys["ITEM_DRAGONBREATH_NAME"], "龙息草" },
 
                 //物品互动
                 { manager.Keys["ITEM_NO_EFFECT"], "" },
 
                 //物品栏
-                { manager.Keys["INVENTORY_CONTENT"], "{character_name}的物品栏中有："},
+                { manager.Keys["INVENTORY_CONTENT"], "{character_name}的物品栏中有：{content}"},
                 { manager.Keys["INVENTORY_CONTENT_EMPTY"], "{character_name}的物品栏为空！" },
                 { manager.Keys["INVENTORY_FORMAT"], "{item_name} * {quantity}" },
                 { manager.Keys["INVENTORY_FORMAT_SEPARATOR"], "，" },
             };
         }
+
         public new string GetValue(LocaleKey key)
         {
             try
@@ -89,6 +113,12 @@ namespace Native.Csharp.App.UserInteract
             {
                 return key.ToString();
             }
+        }
+
+        private void Add(string key, params string[] value)
+        {
+            LocaleManager manager = Plugin.LocaleManager;
+            //Locales.Add(manager.Keys[key], value);
         }
     }
 }

@@ -11,9 +11,13 @@ namespace Native.Csharp.App.Gameplay.Items.Foods
     public class Berry : Food
     {
 
-        public Berry()
+        public Berry() : base()
         {
             DecayTime = DateTime.Now + new TimeSpan(3, 0, 0, 0);
+            InternalName = "catnip";
+
+            DisplayName = Plugin.LocaleManager.GetKey("ITEM_BERRY_NAME");
+            Description = Plugin.LocaleManager.GetKey("ITEM_BERRY_DESCRIPTION");
         }
 
         public override void Decay()

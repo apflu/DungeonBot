@@ -9,9 +9,9 @@ namespace Native.Csharp.App.Gameplay.Handler
 {
     public class HerbHandler
     {
-        public const int MinutesGatherSingleHerb = 5;
-        public const int MinutesGatherMultipleHerb = 6;
-        public IItem[] GetHerb(Player _, int quantity)
+        public const int MinutesGatherSingleHerb = 10;
+        public const int MinutesGatherMultipleHerb = 12;
+        public Item[] GetHerb(Player _, int quantity)
         {
             return Plugin.GetItemHandler().DefaultItemGenerator.Generate(quantity);
         }
@@ -24,9 +24,15 @@ namespace Native.Csharp.App.Gameplay.Handler
         public void GatherHerb(Player sender, int quantity)
         {
             if (quantity > 1)
-                sender.GetCurrentCharacter().AddBusyTime(new TimeSpan(0, quantity * MinutesGatherMultipleHerb, 0));
+                sender.GetCurrentCharacter().SetJob(
+                    Flag.Value_JobHerb,
+                    new TimeSpan(0, quantity * MinutesGatherMultipleHerb, 0)
+                    );
             else
-                sender.GetCurrentCharacter().AddBusyTime(new TimeSpan(0, MinutesGatherSingleHerb, 0));
+                sender.GetCurrentCharacter().SetJob(
+                    Flag.Value_JobHerb,
+                    new TimeSpan(0, MinutesGatherSingleHerb, 0)
+                    );
 
             //设置正在采集的数量
             sender.GetCurrentCharacter().SetFlag(new Flag("quantityJobGatheringHerb", quantity + ""));

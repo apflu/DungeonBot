@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Native.Csharp.App.Gameplay.Items.ItemTypes
 {
-    public interface IItemUseable : IItem
+    public interface IItemUseable : Item
     {
         bool Use(Character user);
     }

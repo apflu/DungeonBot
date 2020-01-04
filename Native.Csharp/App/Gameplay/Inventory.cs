@@ -21,9 +21,9 @@ namespace Native.Csharp.App.Gameplay
         /// 添加1个物品到物品栏中
         /// </summary>
         /// <param name="item">欲要添加的物品</param>
-        public void AddItem(params IItem[] items)
+        public void AddItem(params Item[] items)
         {
-            foreach(IItem item in items)
+            foreach(Item item in items)
             {
                 ItemStack existedStack = SearchInventory(item);
 
@@ -52,7 +52,7 @@ namespace Native.Csharp.App.Gameplay
         /// 丢弃物品栏中所有指定物品
         /// </summary>
         /// <param name="item"></param>
-        public bool AbandonItems(IItem item)
+        public bool AbandonItems(Item item)
         {
             ItemStack stack = SearchInventory(item);
             if(stack != null)
@@ -85,7 +85,7 @@ namespace Native.Csharp.App.Gameplay
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        private ItemStack SearchInventory(IItem item)
+        private ItemStack SearchInventory(Item item)
         {
             foreach (ItemStack stack in Items)
                 if (stack.Item.Equals(item))
@@ -106,6 +106,25 @@ namespace Native.Csharp.App.Gameplay
             return null;
         }
 
+        public static Inventory operator +(Inventory firstInv, Inventory secondInv)
+        {
+            foreach (ItemStack item in secondInv.Items)
+                firstInv.AddItem(item);
+            return firstInv;
+        }
+
+        public static Inventory operator +(Inventory firstInv, Item item)
+        {
+            firstInv.AddItem(item);
+            return firstInv;
+        }
+
+        public static Inventory operator +(Inventory firstInv, ItemStack items)
+        {
+            firstInv.AddItem(items);
+            return firstInv;
+        }
+
         /// <summary>
         /// 将物品栏的内容列为文本，每行一项
         /// </summary>
@@ -116,7 +135,7 @@ namespace Native.Csharp.App.Gameplay
             foreach(ItemStack itemStack in Items)
             {
                 // "\r\n": 换行符
-                result += "\r\n" + itemStack.Item.ItemName + " * " + itemStack.Quantity;
+                result += "\r\n" + itemStack.Item.DisplayName + " * " + itemStack.Quantity;
             }
             return result;
         }

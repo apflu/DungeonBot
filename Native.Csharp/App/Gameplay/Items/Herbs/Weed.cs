@@ -8,6 +8,11 @@ namespace Native.Csharp.App.Gameplay.Items.Herbs
 {
     class Weed : Herb
     {
+        public Weed() : base()
+        {
+            InternalName = "weed";
+            DisplayName = Plugin.LocaleManager.GetKey("ITEM_WEED_NAME");
+        }
         public override void Decay()
         {
             

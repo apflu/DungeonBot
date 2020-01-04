@@ -12,6 +12,7 @@ namespace Native.Csharp.App.Gameplay.CharacterUtil
     {
         public List<IModifier> Modifiers { get; }
         public DateTime NextHungerTime;
+        public DateTime NextFatigueTime;
         public Character Owner;
 
         public CharacterModifiers(Character player)

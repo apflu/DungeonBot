@@ -2,6 +2,8 @@
 using Native.Csharp.Sdk.Cqp.Interface;
 using Native.Csharp.App.Util;
 using System.Collections;
+using Native.Csharp.App.Data.Yaml;
+using Native.Csharp.App.Data.Loader;
 
 namespace Native.Csharp.App.Event
 {
@@ -10,11 +12,13 @@ namespace Native.Csharp.App.Event
     /// </summary>
     public class Event_CqAppEnable : ICqAppEnable
     {
+        private const string Message = "Dungeon Bot启动完成！";
+
         /// <summary>
-		/// 处理 酷Q 的插件启动事件回调
-		/// </summary>
-		/// <param name="sender">事件的触发对象</param>
-		/// <param name="e">事件的附加参数</param>
+        /// 处理 酷Q 的插件启动事件回调
+        /// </summary>
+        /// <param name="sender">事件的触发对象</param>
+        /// <param name="e">事件的附加参数</param>
         public void CqAppEnable(object sender, CqAppEnableEventArgs e)
         {
             // 当应用被启用后，本方法将被调用。
@@ -22,34 +26,26 @@ namespace Native.Csharp.App.Event
             // 如非必要，不建议在这里加载窗口。（可以添加菜单，让用户手动打开窗口）
 
             // 创建公用变量
-            InitObjects();
             InitValues();
+            LoadData();
+
+            Plugin.GetMessageSender().DebugSend(Message);
 
             Common.IsRunning = true;
             
         }
 
-        private void InitObjects()
-        {
-            Plugin.SetMessageSender(new UserInteract.MessageSender());
-            Plugin.SetLocaleManager(new UserInteract.LocaleManager());
-
-            Plugin.SetPlayerHandler(new Gameplay.Handler.PlayerHandler());
-            Plugin.SetCommandHandler(new Command.CommandHandler());
-            Plugin.SetItemHandler(new Gameplay.Handler.ItemHandler());
-            Plugin.SetHerbHandler(new Gameplay.Handler.HerbHandler());
-            Plugin.SetCharacterHandler(new Gameplay.Handler.CharacterHandler());
-            //Plugin.SetEventContainer(new Events.EventContainer());
-
-            Plugin.GetMessageSender().DebugSend("Dungeon Bot启动完成！");
-        }
-
         private void InitValues()
         {
-            Plugin.Values = new Values();
+            LocaleParser.Parse();
 
             Plugin.GetLocaleManager().RegisterLocale(new UserInteract.LocaleDefault());
             //Plugin.GetLocaleManager().RegisterLocale(new UserInteract.LocaleLila());
+        }
+
+        private void LoadData()
+        {
+            DataLoader.Load();
         }
     }
 }

@@ -9,6 +9,12 @@ namespace Native.Csharp.App.Gameplay.Items.Herbs
 {
     class HoneyBerry : Herb
     {
+        public HoneyBerry() : base()
+        {
+            InternalName = "honey_berry";
+            DisplayName = Plugin.LocaleManager.Keys["ITEM_HONEY_BERRY_NAME"];
+            Description = Plugin.LocaleManager.Keys["ITEM_HONEY_BERRY_DESCRIPTION"];
+        }
         public override void Decay()
         {
             throw new NotImplementedException();
@@ -17,7 +23,7 @@ namespace Native.Csharp.App.Gameplay.Items.Herbs
         public override bool Use(Character user)
         {
             (new Berry()).Use(user);
-            user.Heal(Plugin.Values.GetDice("1d4").GetResult().IntResult, Plugin.Values.Flag_FromNature);
+            user.Heal(1);
 
             return true;
         }

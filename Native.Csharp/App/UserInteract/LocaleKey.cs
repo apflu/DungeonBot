@@ -19,7 +19,7 @@ namespace Native.Csharp.App.UserInteract
 
         public override string ToString()
         {
-            return Name;
+            return '{' + Name + '}';
         }
     }
 }

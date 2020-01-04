@@ -1,4 +1,5 @@
 ﻿using Native.Csharp.App.Gameplay.Generator;
+using Native.Csharp.App.Gameplay.Items.Foods;
 using Native.Csharp.App.Gameplay.Items.Herbs;
 using Native.Csharp.App.Gameplay.Items.ItemTypes;
 using Native.Csharp.App.UserInteract;
@@ -14,15 +15,15 @@ namespace Native.Csharp.App.Gameplay.Handler
 {
     public class ItemHandler
     {
-        public List<IItem> ItemList { get; }
+        public List<Item> ItemList { get; }
         public RandomTable DefaultRandomTable { get; private set; }
         public ItemGenerator DefaultItemGenerator { get; private set; }
         public ItemHandler()
         {
-            ItemList = new List<IItem>
+            ItemList = new List<Item>
             {
                 //食物
-
+                new Berry(),
 
                 //草药
                 new Weed(),
@@ -34,11 +35,11 @@ namespace Native.Csharp.App.Gameplay.Handler
 
             //debug以及临时用default变量
             DefaultRandomTable = new RandomTable().AddPossibility(
-                new Possibility(Parse(1), 100),
-                new Possibility(Parse(2), 40),
-                new Possibility(Parse(3), 20),
-                new Possibility(Parse(4), 10),
-                new Possibility(Parse(5), 1)
+                new Possibility(Parse("weed"), 100),
+                new Possibility(Parse("sparkled_fern"), 40),
+                new Possibility(Parse("honey_berry"), 20),
+                new Possibility(Parse("catnip"), 10),
+                new Possibility(Parse("dragonbreath"), 1)
                 );
             DefaultItemGenerator = new ItemGenerator(DefaultRandomTable);
         }
@@ -48,20 +49,20 @@ namespace Native.Csharp.App.Gameplay.Handler
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public static string ConvertToString(params IItem[] items)
+        public static string ConvertToString(params Item[] items)
         {
             string result = "";
 
-            foreach(IItem item in items)
+            foreach(Item item in items)
             {
-                result += item.ItemName + "、";
+                result += item.DisplayName + "、";
             }
             return result.TrimEnd('、');
         }
 
-        public bool Register(params IItem[] items)
+        public bool Register(params Item[] items)
         {
-            foreach(IItem item in items)
+            foreach(Item item in items)
             {
                 if(!ItemList.Contains(item))
                 {
@@ -72,32 +73,34 @@ namespace Native.Csharp.App.Gameplay.Handler
             return false;
         }
 
-        /// <summary>
-        /// 使用物品id来索引，如不存在则返回null
-        /// </summary>
-        /// <param name="itemID">物品id</param>
-        /// <returns></returns>
-        public IItem Parse(int itemID)
+        public Item GetItem(string anyName)
         {
-            foreach (IItem item in ItemList)
-                if (item.ItemID == itemID)
+            foreach (Item item in ItemList)
+            {
+                if (anyName == item.InternalName)
                     return item;
+                if (anyName == item.DisplayName.ToString())
+                    return item;
+
+                foreach (Locale locale in Plugin.LocaleManager.GetAllLocales())
+                {
+                    if (anyName == locale.GetValue(item.DisplayName))
+                        return item;
+                }
+            }
             return null;
         }
 
         /// <summary>
-        /// 使用物品名来索引，如不存在则返回null
+        /// 使用物品id来索引，如不存在则返回null
         /// </summary>
-        /// <param name="itemName">任意语言下的物品名称</param>
+        /// <param name="internal_name">物品id</param>
         /// <returns></returns>
-        public IItem Parse(string itemName)
+        public Item Parse(string internal_name)
         {
-            foreach (IItem item in ItemList)
-                foreach (Locale locale in Plugin.GetLocaleManager().GetAllLocales())
-                {
-                    if (locale.GetValue(item.ItemName) == itemName)
-                        return item;
-                }
+            foreach (Item item in ItemList)
+                if (item.InternalName == internal_name)
+                    return item;
             return null;
         }
     }
